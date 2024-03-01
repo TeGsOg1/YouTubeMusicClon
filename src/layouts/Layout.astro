@@ -1,5 +1,9 @@
 ---
-import Principal from "../Icons/Principal.astro";
+import Burguer from "../Icons/BurguerIcon.astro";
+import LogoYTM from "../Icons/LogoYTM.astro";
+import MainIcon from "../Icons/MainIcon.astro";
+import ExplorerIcon from "../Icons/ExplorerIcon.astro";
+import LibraryIcon from "../Icons/LibraryIcon.astro";
 
 interface Props {
   title: string;
@@ -19,29 +23,60 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <div id="app" class="h-screen w-full gap-2">
-      <nav class="[grid-area:nav] bg-green-500"></nav>
+    <div id="openApp" class="h-screen w-full gap-2">
+      <nav class="[grid-area:nav] flex flex-row items-center pl-6">
+        <button class=" rounded-full  mr-4 p-2 hover:bg-gray-700 transition-all">
+          <Burguer />
+        </button>
+        <a href="/">
+          <LogoYTM />
+        </a>
+      </nav>
       <aside
-        class="flex flex-col gap-1 [grid-area:aside] max-w-96 bg-pink-500 border-gray-800"
+        class="flex flex-col gap-1 [grid-area:aside] transition-all md:bg-gray-600 rounded-xl overflow-y-auto overflow-x-hidden "
       >
-        <ul>
-          <li>
-            <a href=""> </a>
+        <ul class="flex flex-col gap-1 pt-1">
+          <li class="flex flex-row border-2 border-solid border-black">
+            <a class="flex flex-row p-6 text-white text-lg pr-32" href="/">
+				<MainIcon /> <span class="ml-2" id="princ">Principal</span> </a>
           </li>
-          <li>
-            <a href=""> </a>
+          <li class="flex flex-row border-2 border-solid border-black ">
+            <a class="flex flex-row p-6 text-white text-lg pr-32" href="/">
+				<ExplorerIcon /> <span class="ml-2" id="expl">Explorar</span>
+			 </a>
           </li>
-          <li>
-            <a href=""> </a>
+          <li class="flex flex-row border-2 border-solid border-black">
+            <a class="flex flex-row p-6 text-white text-lg pr-32" href="/">
+				<LibraryIcon /> <span class="ml-2 mb-" id="lib">Biblioteca</span>
+			</a>
           </li>
         </ul>
       </aside>
-      <main class="[grid-area:main] bg-red-900">
+      <main class="[grid-area:main] w-full bg-red-500 ">
         <slot />
       </main>
-      <footer class="[grid-area:player] bg-blue-500"></footer>
+      <footer class="[grid-area:player]"></footer>
     </div>
   </body>
+
+  <script>
+const burguer = document.querySelector("button");
+const library = document.querySelector("#lib");
+const explorer = document.querySelector("#expl");
+const principal = document.querySelector("#princ");
+
+burguer?.addEventListener("click", () => {
+  const app = document.querySelector("#openApp") || document.querySelector("#closeApp");
+  if (app?.id === 'openApp') {
+    app.id = 'closeApp';
+  } else if (app?.id === 'closeApp') {
+    app.id = 'openApp';
+  }
+  library?.classList.toggle("hidden");
+  explorer?.classList.toggle("hidden");
+  principal?.classList.toggle("hidden");
+});
+  </script>
   <style is:global>
     * {
       box-sizing: border-box;
@@ -53,14 +88,24 @@ const { title } = Astro.props;
       background: #232323;
     }
 
-    #app {
+    #openApp {
       display: grid;
       grid-template-areas:
         "nav nav nav"
         "aside main main"
         "player player player";
-      grid-template-columns: 1fr 4fr 1fr;
-      grid-template-rows: 90px 1fr 80px;
+      grid-template-columns: 250px 4fr 1fr;
+      grid-template-rows: 70px 1fr 70px;
+    }
+
+    #closeApp {
+      display: grid;
+      grid-template-areas:
+        "nav nav nav"
+        "aside main main"
+        "player player player";
+      grid-template-columns: 80px 4fr 1fr;
+      grid-template-rows: 70px 1fr 70px;
     }
   </style>
 </html>
