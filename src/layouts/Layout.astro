@@ -23,58 +23,69 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <div id="openApp" class="h-screen w-full gap-2">
-      <nav class="[grid-area:nav] flex flex-row items-center pl-6">
-        <button class=" rounded-full  mr-4 p-2 hover:bg-gray-700 transition-all">
+    <div id="app" class="h-screen w-full gap-2">
+     <div class="[grid-area:content] relative">
+        <div class="absolute top-0 bottom-0 z-[-2] min-h-screen w-full bg-gray-50 dark:bg-gray-950
+        bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(217,216,255,0.5),rgba(255,255,255,0.9))]
+        dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+      <header class=" flex flex-row items-center p-4 gap-4   " >
+        <button class=" rounded-full p-2 hover:bg-gray-700 transition-all">
           <Burguer />
         </button>
-        <a href="/">
+        <a href="/" aria-label="Inicio">
           <LogoYTM />
         </a>
-      </nav>
+        <nav class="flex flex-row m-auto">
+            <input type="text" class=" w-[400px] p-2 rounded-3xl indent-4 bg-gray-800 text-white" placeholder="Busca una canción..." />
+        </nav>
+    </header>
+    
       <aside
-        class="flex flex-col gap-1 [grid-area:aside] transition-all md:bg-gray-600 rounded-xl overflow-y-auto overflow-x-hidden "
+        class="flex flex-col gap-1 w-64 ml-2 transition-all md:bg-gray-600 rounded-xl overflow-y-auto overflow-x-hidden "
+        
       >
-        <ul class="flex flex-col gap-1 pt-1">
-          <li class="flex flex-row border-2 border-solid border-black">
-            <a class="flex flex-row p-6 text-white text-lg pr-32" href="/">
-				<MainIcon /> <span class="ml-2" id="princ">Principal</span> </a>
-          </li>
-          <li class="flex flex-row border-2 border-solid border-black ">
-            <a class="flex flex-row p-6 text-white text-lg pr-32" href="/">
-				<ExplorerIcon /> <span class="ml-2" id="expl">Explorar</span>
-			 </a>
-          </li>
-          <li class="flex flex-row border-2 border-solid border-black">
-            <a class="flex flex-row p-6 text-white text-lg pr-32" href="/">
-				<LibraryIcon /> <span class="ml-2 mb-" id="lib">Biblioteca</span>
-			</a>
-          </li>
+        <ul>
+            <li>
+                <a href="/" class="flex flex-row items-center gap-2 p-4 text-white hover:bg-gray-700 transition-all">
+                    <MainIcon />
+                    <span id="princ">Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a href="/explorer" class="flex flex-row items-center gap-2 p-4 text-white hover:bg-gray-700 transition-all">
+                    <ExplorerIcon />
+                    <span id="expl">Explorar</span>
+                </a>
+            </li>
+            <li>
+                <a href="/library" class="flex flex-row items-center gap-2 p-4 text-white hover:bg-gray-700 transition-all">
+                    <LibraryIcon />
+                    <span id="lib">Biblioteca</span>
+                </a>
+            </li>
         </ul>
       </aside>
-      <main class="[grid-area:main] w-full bg-red-500 ">
+      <main class="[grid-area:main] w-full  ">
         <slot />
       </main>
-      <footer class="[grid-area:player]"></footer>
+    </div>
+      <footer class="[grid-area:player] bg-blue-900"></footer>
     </div>
   </body>
+  </html>
 
-  <script>
+  <script transition:persist>
 const burguer = document.querySelector("button");
-const library = document.querySelector("#lib");
-const explorer = document.querySelector("#expl");
-const principal = document.querySelector("#princ");
+const aside = document.querySelector("aside");
+const principal = document.getElementById("princ");
+const explorer = document.getElementById("expl");
+const library = document.getElementById("lib");
 
 burguer?.addEventListener("click", () => {
-  const app = document.querySelector("#openApp") || document.querySelector("#closeApp");
-  if (app?.id === 'openApp') {
-    app.id = 'closeApp';
-  } else if (app?.id === 'closeApp') {
-    app.id = 'openApp';
-  }
-  library?.classList.toggle("hidden");
-  explorer?.classList.toggle("hidden");
+  aside?.classList.toggle("w-16");
   principal?.classList.toggle("hidden");
+  explorer?.classList.toggle("hidden");
+  library?.classList.toggle("hidden");
 });
   </script>
   <style is:global>
@@ -88,24 +99,13 @@ burguer?.addEventListener("click", () => {
       background: #232323;
     }
 
-    #openApp {
+    #app {
       display: grid;
       grid-template-areas:
-        "nav nav nav"
-        "aside main main"
+        "content content content"
+        "content content content"
         "player player player";
-      grid-template-columns: 250px 4fr 1fr;
-      grid-template-rows: 70px 1fr 70px;
-    }
-
-    #closeApp {
-      display: grid;
-      grid-template-areas:
-        "nav nav nav"
-        "aside main main"
-        "player player player";
-      grid-template-columns: 80px 4fr 1fr;
+      grid-template-columns: 250px 1fr 1fr;
       grid-template-rows: 70px 1fr 70px;
     }
   </style>
-</html>
