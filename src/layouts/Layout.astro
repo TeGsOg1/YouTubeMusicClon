@@ -4,6 +4,7 @@ import LogoYTM from "../Icons/LogoYTM.astro";
 import MainIcon from "../Icons/MainIcon.astro";
 import ExplorerIcon from "../Icons/ExplorerIcon.astro";
 import LibraryIcon from "../Icons/LibraryIcon.astro";
+import SearcherIcon from "../Icons/SearcherIcon.astro";
 
 interface Props {
   title: string;
@@ -22,90 +23,114 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body>
+  <body class="overflow-x-hidden">
     <div id="app" class="h-screen w-full gap-2">
-     <div class="[grid-area:content] relative">
-        <div class="absolute top-0 bottom-0 z-[-2] min-h-screen w-full bg-gray-50 dark:bg-gray-950
+      <div class="[grid-area:content] relative">
+        <div
+          class="absolute top-0 bottom-0 z-[-2] min-h-screen w-full bg-gray-50 dark:bg-gray-950
         bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(217,216,255,0.5),rgba(255,255,255,0.9))]
-        dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
-      <header class=" flex flex-row items-center p-4 gap-4   " >
-        <button class=" rounded-full p-2 hover:bg-gray-700 transition-all">
-          <Burguer />
-        </button>
-        <a href="/" aria-label="Inicio">
-          <LogoYTM />
-        </a>
-        <nav class="flex flex-row m-auto">
-            <input type="text" class=" w-[400px] p-2 rounded-3xl indent-4 bg-gray-800 text-white" placeholder="Busca una canción..." />
-        </nav>
-    </header>
-    
-      <aside
-        class="flex flex-col gap-1 w-64 ml-2 transition-all md:bg-gray-600 rounded-xl overflow-y-auto overflow-x-hidden "
-        
-      >
-        <ul>
+        dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
+        >
+        </div>
+        <header class="flex flex-row items-center p-4 gap-4">
+          <button class="rounded-full p-2 hover:bg-gray-700 transition-all">
+            <Burguer />
+          </button>
+          <a href="/" aria-label="Inicio">
+            <LogoYTM />
+          </a>
+          <nav class="flex flex-row m-auto">
+            <label class="flex flex-row p-2 rounded-l-3xl border-solid border-r-2 border-gray-700 bg-gray-800 cursor-pointer" for="searcher">
+              <SearcherIcon />
+            </label>
+            <input
+              type="text"
+              id="searcher"
+              class="flex flex-row w-[400px] p-2 rounded-r-3xl indent-4 focus:border-solid focus:border-2  bg-gray-800 text-white"
+              placeholder= "Busca una canción..."
+            />
+          
+          </nav>
+        </header>
+
+        <aside
+          class="flex flex-row fixed bg-gray-600 w-64 ml-2 z-10 transition-all rounded-lg"
+          id="aside"
+        >
+          <ul>
             <li>
-                <a href="/" class="flex flex-row items-center gap-2 p-4 text-white hover:bg-gray-700 transition-all">
-                    <MainIcon />
-                    <span id="princ">Inicio</span>
-                </a>
+              <a
+                href="/"
+                class="flex flex-row items-center rounded-lg  gap-2 p-4 text-white hover:bg-gray-700 transition-all"
+              >
+                <MainIcon />
+                <span id="princ">Inicio</span>
+              </a>
             </li>
             <li>
-                <a href="/explorer" class="flex flex-row items-center gap-2 p-4 text-white hover:bg-gray-700 transition-all">
-                    <ExplorerIcon />
-                    <span id="expl">Explorar</span>
-                </a>
+              <a
+                href="/explorer"
+                class="flex flex-row items-center rounded-lg gap-2 w-full p-4 text-white hover:bg-gray-700 transition-all"
+              >
+                <ExplorerIcon />
+                <span id="expl">Explorar</span>
+              </a>
             </li>
             <li>
-                <a href="/library" class="flex flex-row items-center gap-2 p-4 text-white hover:bg-gray-700 transition-all">
-                    <LibraryIcon />
-                    <span id="lib">Biblioteca</span>
-                </a>
+              <a
+                href="/library"
+                class="flex flex-row items-center rounded-lg gap-2 p-4 text-white hover:bg-gray-700 transition-all"
+              >
+                <LibraryIcon />
+                <span id="lib">Biblioteca</span>
+              </a>
             </li>
-        </ul>
-      </aside>
-      <main class="[grid-area:main] w-full  ">
-        <slot />
-      </main>
-    </div>
-      <footer class="[grid-area:player] bg-blue-900"></footer>
+          </ul>
+        </aside>
+        <main class="flex flex-col w-full gap-4 ml-72 transition-all">
+          <slot />
+        </main>
+      </div>
+      <footer class="[grid-area:player] bg-gray-800"></footer>
     </div>
   </body>
-  </html>
+</html>
 
-  <script transition:persist>
-const burguer = document.querySelector("button");
-const aside = document.querySelector("aside");
-const principal = document.getElementById("princ");
-const explorer = document.getElementById("expl");
-const library = document.getElementById("lib");
+<script>
+  const button  = document.querySelector('button');
+  const aside = document.querySelector('#aside');
+  const explorer = document.querySelector('#expl');
+  const library = document.querySelector('#lib');
+  const principal = document.querySelector('#princ');
+  const main = document.querySelector('main');
 
-burguer?.addEventListener("click", () => {
-  aside?.classList.toggle("w-16");
-  principal?.classList.toggle("hidden");
-  explorer?.classList.toggle("hidden");
-  library?.classList.toggle("hidden");
-});
-  </script>
-  <style is:global>
-    * {
-      box-sizing: border-box;
-      padding: 0;
-      margin: 0;
-    }
+  button?.addEventListener('click', () => {
+    aside?.classList.toggle('w-[60px]');
+    explorer?.classList.toggle('hidden');
+    library?.classList.toggle('hidden');
+    principal?.classList.toggle('hidden');
+    main?.classList.toggle('ml-[90px]');
+  });
+</script>
 
-    body {
-      background: #232323;
-    }
+<style is:global>
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
 
-    #app {
-      display: grid;
-      grid-template-areas:
-        "content content content"
-        "content content content"
-        "player player player";
-      grid-template-columns: 250px 1fr 1fr;
-      grid-template-rows: 70px 1fr 70px;
-    }
-  </style>
+  body {
+    background: #232323;
+  }
+
+  #app {
+    display: grid;
+    grid-template-areas:
+      "content content content"
+      "content content content"
+      "player player player";
+    grid-template-columns: 250px 1fr 1fr;
+    grid-template-rows: 70px 1fr 70px;
+  }
+</style>
