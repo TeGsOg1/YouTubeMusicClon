@@ -76,7 +76,7 @@ export const playlists: Playlist[] = [
     id: '8',
     albumId: 8,
     title: "La Camisa Negra",
-    color: colors.black,
+    color: colors.red,
     image: "https://i.scdn.co/image/ab67616d0000b273c091c40987e92a9256d2f210",
     artists: ["Juanes"],
   },
