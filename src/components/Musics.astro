@@ -1,0 +1,25 @@
+---
+import type { Playlist } from "../lib/data"
+
+interface Props {
+  song: Playlist;
+}
+
+const { song } = Astro.props
+const { title, artists, image, id } = song
+---
+
+<article class="flex flex-col w-48 h-auto p-2 rounded-lg bg-gray-800/30 hover:bg-gray-600 transition-all cursor-pointer">
+<a href={`/${id}`} data-id={id}>
+  <img
+    class="w-full h-auto min-w-[180px]"
+    src={ image }
+    alt=""
+    transition:name=`${ id } image`
+      />
+  <h1 class="text-white justify-start text-xl"
+    transition:name=`${ id } title`
+  >{ title }</h1>
+  <p class="text-gray-400 opa" transition:name=`${ id } artist`>{ artists }</p>
+</a>
+</article>

@@ -1,10 +1,12 @@
 ---
-import Burguer from "../Icons/BurguerIcon.astro";
-import LogoYTM from "../Icons/LogoYTM.astro";
-import MainIcon from "../Icons/MainIcon.astro";
-import ExplorerIcon from "../Icons/ExplorerIcon.astro";
-import LibraryIcon from "../Icons/LibraryIcon.astro";
-import SearcherIcon from "../Icons/SearcherIcon.astro";
+import Burguer from "@/icons/BurguerIcon.astro";
+import LogoYTM from "@/icons/LogoYTM.astro";
+import MainIcon from "@/icons/MainIcon.astro";
+import ExplorerIcon from "@/icons/ExplorerIcon.astro";
+import LibraryIcon from "@/icons/LibraryIcon.astro";
+import Nav from "@/components/Nav.astro";
+import { Player } from "@/components/Player";
+import ViewTransitions from "astro/components/ViewTransitions.astro";
 
 interface Props {
   title: string;
@@ -22,6 +24,7 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <ViewTransitions />
   </head>
   <body class="overflow-x-hidden">
     <div id="app" class="h-screen w-full gap-2">
@@ -32,85 +35,94 @@ const { title } = Astro.props;
         dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
         >
         </div>
-        <header class="flex flex-row items-center p-4 gap-4">
+        <header class="flex flex-row items-center p-4 gap-4 w-full">
           <button class="rounded-full p-2 hover:bg-gray-700 transition-all">
             <Burguer />
           </button>
           <a href="/" aria-label="Inicio">
             <LogoYTM />
           </a>
-          <nav class="flex flex-row m-auto">
-            <label class="flex flex-row p-2 rounded-l-3xl border-solid border-r-2 border-gray-700 bg-gray-800 cursor-pointer" for="searcher">
-              <SearcherIcon />
-            </label>
-            <input
-              type="text"
-              id="searcher"
-              class="flex flex-row w-[400px] p-2 rounded-r-3xl indent-4 focus:border-solid focus:border-2  bg-gray-800 text-white"
-              placeholder= "Busca una canción..."
-            />
-          
-          </nav>
-        </header>
+<!--             <Nav />
+ -->        </header>
 
         <aside
-          class="flex flex-row fixed bg-gray-600 w-64 ml-2 z-10 transition-all rounded-lg"
+          transition:persist
+          class="flex flex-row fixed bg-gray-600 w-60 ml-2 z-10 transition-all rounded-lg"
           id="aside"
         >
           <ul>
             <li>
-              <a
+              <a 
+                id="princ"
                 href="/"
-                class="flex flex-row items-center rounded-lg  gap-2 p-4 text-white hover:bg-gray-700 transition-all"
+                class="flex flex-row items-center rounded-lg pr-[123px]  gap-2 p-4 text-white hover:bg-gray-700 transition-all"
               >
                 <MainIcon />
-                <span id="princ">Inicio</span>
+                <span id="princ-txt">Inicio</span>
               </a>
             </li>
             <li>
               <a
+                id="expl"
                 href="/explorer"
-                class="flex flex-row items-center rounded-lg gap-2 w-full p-4 text-white hover:bg-gray-700 transition-all"
+                class="flex flex-row items-center rounded-lg pr-[123px] gap-2 w-full p-4 text-white hover:bg-gray-700 transition-all"
               >
                 <ExplorerIcon />
-                <span id="expl">Explorar</span>
+                <span id="expl-txt">Explorar</span>
               </a>
             </li>
             <li>
               <a
+                id="lib"
                 href="/library"
-                class="flex flex-row items-center rounded-lg gap-2 p-4 text-white hover:bg-gray-700 transition-all"
+                class="flex flex-row items-center rounded-lg pr-[123px] gap-2 p-4 text-white hover:bg-gray-700 transition-all"
               >
                 <LibraryIcon />
-                <span id="lib">Biblioteca</span>
+                <span id="lib-txt">Biblioteca</span>
               </a>
             </li>
           </ul>
         </aside>
-        <main class="flex flex-col w-full gap-4 ml-72 transition-all">
+        <main class="flex flex-col w-full gap-4 pl-72 transition-all overflow-hidden">
           <slot />
         </main>
       </div>
-      <footer class="[grid-area:player] bg-gray-800"></footer>
+      <footer class="[grid-area:player] bg-gray-800 z-10">
+        <Player client:load transition:name="media-player" transition:persist/>
+      </footer>
     </div>
   </body>
 </html>
 
-<script>
+<script transition:persist>
+  document.addEventListener('astro:page-load', () => {
   const button  = document.querySelector('button');
   const aside = document.querySelector('#aside');
+  const explorerText = document.querySelector('#expl-txt');
+  const libraryText = document.querySelector('#lib-txt');
+  const principalText = document.querySelector('#princ-txt');
+
   const explorer = document.querySelector('#expl');
   const library = document.querySelector('#lib');
   const principal = document.querySelector('#princ');
+
   const main = document.querySelector('main');
 
   button?.addEventListener('click', () => {
     aside?.classList.toggle('w-[60px]');
-    explorer?.classList.toggle('hidden');
-    library?.classList.toggle('hidden');
-    principal?.classList.toggle('hidden');
-    main?.classList.toggle('ml-[90px]');
+    explorerText?.classList.toggle('hidden');
+    libraryText?.classList.toggle('hidden');
+    principalText?.classList.toggle('hidden');
+    main?.classList.toggle('pl-[90px]');
   });
+  
+  if(aside?.classList.contains('w-[60px]')) {
+    main?.classList.add('pl-[90px]');
+    explorer?.classList.toogle('pr-[123px]');
+    library?.classList.toogle('pr-[123px]');
+    principal?.classList.remove('pr-[123px]');
+  } 
+});
 </script>
 
 <style is:global>

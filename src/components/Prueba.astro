@@ -1,0 +1,27 @@
+---
+interface Props {
+  image: string;
+  title: string;
+  artist: string;
+  transition: string;
+}
+
+const { image, title, artist, transition } = Astro.props;
+---
+
+<article class="flex flex-col w-60 h-auto p-2">
+<a href="MusicPage">
+  <img
+    class="w-full aspect-auto	"
+    src={ image }
+    alt=""
+    
+    transition:name=`${ transition } image`
+      />
+  <h1 class="text-white justify-start text-xl"
+    transition:name=`${ transition } title`
+
+  >{ title }</h1>
+  <p class="text-gray-400 opa" transition:name=`${ transition } artist` >{ artist }</p>
+</a>
+</article>
