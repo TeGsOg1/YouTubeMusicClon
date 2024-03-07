@@ -32,6 +32,41 @@ import { allPlaylists, songs } from "../lib/data"
       params: {
         id: "5"
       }
+    },
+    {
+      params: {
+        id: "6"
+      }
+    },
+    {
+      params: {
+        id: "7"
+      }
+    },
+    {
+      params: {
+        id: "8"
+      }
+    },
+    {
+      params: {
+        id: "9"
+      }
+    },
+    {
+      params: {
+        id: "10"
+      }
+    },
+    {
+      params: {
+        id: "11"
+      }
+    },
+    {
+      params: {
+        id: "12"
+      }
     }
   ];
 }) satisfies GetStaticPaths;
@@ -52,7 +87,7 @@ const playListSongs = songs.filter((songs) => songs.albumId === playlist?.albumI
         class=" w-[200px] h-auto lg:w-[500px] rounded-xl object-cover aspect-auto"
       />
       <p
-        class="text-gray-400 flex flex-col text-xl"
+        class="text-gray-400 flex flex-col text-2xl"
         transition:name=`${ id } artist`
       >
         { playlist?.artists }
@@ -61,7 +96,7 @@ const playListSongs = songs.filter((songs) => songs.albumId === playlist?.albumI
     <div class="order-1 lg:order-2">
       <h1
         transition:name=`${ id } title`
-        class="text-2xl text-wrap lg:text-5xl text-white max-w-90 mt-10"
+        class="text-2xl text-wrap lg:text-5xl text-white max-w-90"
       >
         { playlist?.title }
       </h1>
