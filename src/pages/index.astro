@@ -2,15 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import Musics from "../components/Musics.astro";
 import { playlists } from "../lib/data";
-
-interface Props {
-  image: string;
-  title: string;
-  artist: string;
-  transition: string;
-}
-
-const { image, title, artist, transition } = Astro.props;
 ---
 
 <Layout title="YouTube Music Clon">
