@@ -95,7 +95,7 @@ const { title } = Astro.props;
   </body>
 </html>
 
-<script transition:persist>
+<script transition:persist is:inline>
   document.addEventListener('astro:page-load', () => {
   const button  = document.querySelector('button');
   const aside = document.querySelector('#aside');
