@@ -43,7 +43,7 @@ export const playlists: Playlist[] = [
     title: "Until I Found You (Piano Version)",
     color: colors.blue,
     image:
-      "/uify.jpeg",
+      "https://i.scdn.co/image/ab67616d0000b273eabddae72a3b1a5ed51d1ac6",
     artists: ["Stephen Sanchez"],
   },
   {
