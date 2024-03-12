@@ -1,106 +1,48 @@
 ---
 import type { GetStaticPaths } from "astro";
 import Layout from "@/layouts/Layout.astro";
-import { allPlaylists, songs } from "@/lib/data";
+import { songs } from "@/lib/data";
 
-export const getStaticPaths = (() => {
-  return [
-    {
-      params: {
-        id: "1",
-      },
-    },
-    {
-      params: {
-        id: "2",
-      },
-    },
-    {
-      params: {
-        id: "3",
-      },
-    },
-    {
-      params: {
-        id: "4",
-      },
-    },
-    {
-      params: {
-        id: "5",
-      },
-    },
-    {
-      params: {
-        id: "6",
-      },
-    },
-    {
-      params: {
-        id: "7",
-      },
-    },
-    {
-      params: {
-        id: "8",
-      },
-    },
-    {
-      params: {
-        id: "9",
-      },
-    },
-    {
-      params: {
-        id: "10",
-      },
-    },
-    {
-      params: {
-        id: "11",
-      },
-    },
-    {
-      params: {
-        id: "12",
-      },
-    },
-  ];
-}) satisfies GetStaticPaths;
+export const getStaticPaths: GetStaticPaths = () => {
+  return songs.map((song) => ({
+    params: { id: song.id.toString() },
+  }));
+};
 
 const { id } = Astro.params;
-
-const playlist = allPlaylists.find((song) => song.id === id);
-const playListSongs = songs.filter(
-  (songs) => songs.albumId === playlist?.albumId
-);
+const song = songs.find((song) => song.id.toString() === id);
 ---
 
-<Layout title="Playlist">
+<Layout title=`YTM Clon ${song?.title}`>
   <div
-    class="flex flex-col lg:flex-row sm:justify-normal gap-4 w-full h-full justify-center"
+    class="grid grid-flow-row lg:grid-cols-2 gap-4 w-full h-full items-center justify-items-center"
   >
     <div class="flex flex-col order-2 lg:order-1">
       <img
-        src={playlist?.image}
+        src={song?.image}
         alt=""
-        transition:name=`${ id } image`
-        class="w-[200px] h-auto lg:w-[500px] rounded-xl object-cover aspect-auto"
+        transition:name={`${id} image`}
+        class="w-[200px] h-auto lg:w-[700px] rounded-xl object-cover aspect-auto"
       />
       <p
-        class="text-gray-400 flex flex-col text-2xl"
-        transition:name=`${ id } artist`
+        class="text-gray-400 text-xl text-center lg:text-start flex flex-col lg:text-2xl"
+        transition:name={`${id} artist`}
       >
-        {playlist?.artists}
+        {song?.artists.join(", ")}
       </p>
     </div>
-    <div class="order-1 lg:order-2">
+    <div class="order-1 lg:order-2 w-full">
       <h1
-        transition:name=`${ id } title`
-        class="text-2xl text-wrap lg:text-5xl text-white max-w-90"
+        transition:name={`${id} title`}
+        class="text-3xl text-wrap lg:text-5xl text-center lg:text-start text-white max-w-90"
       >
-        {playlist?.title}
+        {song?.title}
       </h1>
+      <div class=" hidden  h-dvh w-full lg:block lg:w-auto lg:h-[700px] overflow-auto mt-10 rounded-2xl relative bottom-0 justify-start p-4 bg-gradient-to-b from-slate-800 to-slate-1000">
+        <p class="text-white text-2xl whitespace-pre-line">
+          {song?.lyrics}
+        </p>
+      </div>
     </div>
   </div>
 </Layout>
