@@ -3,6 +3,7 @@ import type { GetStaticPaths } from "astro";
 import Layout from "@/layouts/Layout.astro";
 import { songs } from "@/lib/data";
 import BackPage from "@/components/BackPage.astro"
+import { Player } from "@/components/Player";
 
 export const getStaticPaths: GetStaticPaths = () => {
   return songs.map((song) => ({
@@ -19,14 +20,14 @@ const song = songs.find((song) => song.id.toString() === id);
   <div
     class="grid grid-flow-row mr-20 lg:mr-0 lg:grid-cols-2 gap-10 w-full h-full items-center justify-items-center"
   >
-    <div class="flex flex-col relative order-2 lg:order-1">
-      <img src={song?.image} class="blur-xl w-[200px] h-auto lg:w-[750px] rounded-xl object-cover right-0 left-0 my-0 mx-auto -z-10 absolute" alt="">
+    <div class="flex flex-col px-7 relative order-2 lg:order-1">
+      <img src={song?.image} class="blur-xl min-w-[200px] h-auto lg:w-[750px] px-7 rounded-xl object-cover right-0 left-0 my-0 mx-auto -z-10 absolute" alt="">
 
       <img
         src={song?.image}
         alt=""
         transition:name={`${id} image`}
-        class="w-[200px] h-auto lg:w-[700px] rounded-xl object-cover aspect-auto"
+        class="min-w-[200px] h-auto lg:w-[700px] rounded-xl object-cover aspect-auto"
       />
       
       <p
@@ -39,11 +40,11 @@ const song = songs.find((song) => song.id.toString() === id);
     <div class="order-1 lg:order-2 w-full">
       <h1
         transition:name={`${id} title`}
-        class="text-3xl text-pretty lg:text-5xl text-center lg:text-start text-white max-w-90"
+        class="text-3xl md:text-5xl text-pretty lg:text-5xl text-center lg:text-start text-white max-w-90"
       >
         {song?.title}
       </h1>
-      <div class=" hidden  h-dvh w-full lg:block lg:w-auto lg:h-[700px] overflow-auto mt-10 rounded-2xl relative bottom-0 justify-start p-7 bg-gradient-to-b from-slate-800 to-slate-1000">
+      <div class=" hidden  h-dvh w-full lg:block lg:w-auto lg:h-[700px] overflow-hidden mt-10 rounded-2xl relative bottom-0 justify-start p-7 bg-gradient-to-b from-slate-800 to-slate-1000">
         <p class="text-white text-2xl whitespace-pre-line">
           {song?.lyrics}
         </p>

@@ -178,7 +178,7 @@ export function Player () {
 
       </div>
 
-      <div className="grid place-content-center">
+      <div className="hidden lg:grid lg:place-content-center">
         <VolumeControl />
       </div>
     </div>
