@@ -1,36 +1,70 @@
 ---
 import SearcherIcon from "./icons/SearcherIcon.astro";
-
 ---
 
-<nav class="flex flex-row justify-end md:m-auto">
-  <input
-  type="text"
-  id="searcher"
-  class=" justify-end w-0 hidden md:block md:w-[400px] p-2 rounded-3xl indent-4 focus:border-none transition-all bg-gray-800 text-white"
-  placeholder="Busca una canción..."
-  />
-  <div id="search" class="flex bg-gray-800 rounded-3xl p-2 justify-center items-center h-10 cursor-pointer hover:bg-gray-600 transition-all">
-    <SearcherIcon
-  </div>
-  
+<nav class="flex flex-row">
+  <form action="get">
+    <input
+      type="text"
+      id="searcher"
+      class="w-0 hidden md:block md:w-[400px] p-2 rounded-3xl indent-4 outline-none transition-all bg-gray-800 text-white"
+      placeholder="Busca una canción..."
+    />
+  </form>
 </nav>
 
 <script>
-  const searchbtn = document.querySelector('#search');
-  const searcher = document.querySelector('input');
-
-  searchbtn?.addEventListener('click', () => {
-    searcher?.classList.toggle('w-0');
-    searcher?.classList.toggle('hidden');
-  });
-
-
-  if(searcher) {
-    searcher.addEventListener('keyup', (e) => {
-      if(e.key === 'Enter') {
-        window.location.href = `/search/${searcher.value}`;
+    document.addEventListener('astro:page-load', () => {
+  // Obtener el elemento HTML vacío donde se quiere insertar el texto
+  let NoMusic = document.getElementById("NoMusic")!;
+  // Añadir el tipo Event al parámetro e
+  document.addEventListener("keyup", (e: Event) => {
+    // Usar una aserción de tipo para acceder a las propiedades del evento de teclado
+    if ((e.target as HTMLInputElement).matches("#buscador")) {
+      // Usar otra aserción de tipo para acceder a la propiedad key
+      if ((e as KeyboardEvent).key === "Escape")
+        (e.target as HTMLInputElement).value = "";
+      // Añadir el tipo NodeListOf<HTMLElement> a la variable carrera
+      const carrera: NodeListOf<HTMLElement> = document.querySelectorAll("li");
+      // Añadir una variable para almacenar el resultado del filtro
+      let resultado: HTMLElement[] = [];
+      carrera.forEach((carrera) => {
+        carrera
+          .textContent!.toLowerCase()
+          .includes((e.target as HTMLInputElement).value.toLowerCase())
+          ? carrera.classList.remove("filtro")
+          : carrera.classList.add("filtro");
+        // Añadir los elementos que no tienen la clase filtro al resultado
+        if (!carrera.classList.contains("filtro")) {
+          resultado.push(carrera);
+        }
+      });
+      // Añadir el tipo NodeListOf<HTMLElement> a la variable section
+      const section: NodeListOf<HTMLElement> =
+        document.querySelectorAll("section");
+      section.forEach((section) => {
+        // Contar el número de elementos li dentro del section
+        const liCount = section.querySelectorAll("li").length;
+        // Contar el número de elementos li con la clase filtro dentro del section
+        const filtroCount = section.querySelectorAll("li.filtro").length;
+        // Si son iguales, significa que todos los li están ocultos
+        if (liCount === filtroCount) {
+          // Aplicar la clase filtro al section para ocultarlo también
+          section.classList.add("filtro");
+        } else {
+          // Quitar la clase filtro al section para mostrarlo
+          section.classList.remove("filtro");
+        }
+      });
+      // Comprobar si el resultado está vacío o no
+      if (resultado.length === 0) {
+        // Mostrar el elemento HTML vacío con el texto
+        NoMusic.style.display = "block";
+      } else {
+        NoMusic.style.display = "none";
       }
-    });
-  }
+    }
+  });
+});
+
 </script>

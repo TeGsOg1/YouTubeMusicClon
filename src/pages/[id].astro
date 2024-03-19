@@ -3,7 +3,9 @@ import type { GetStaticPaths } from "astro";
 import Layout from "@/layouts/Layout.astro";
 import { songs } from "@/lib/data";
 import BackPage from "@/components/BackPage.astro"
-import { Player } from "@/components/Player";
+import { fade } from "astro:transitions";
+import Image from "astro/components/Image.astro";
+
 
 export const getStaticPaths: GetStaticPaths = () => {
   return songs.map((song) => ({
@@ -18,16 +20,21 @@ const song = songs.find((song) => song.id.toString() === id);
 <Layout title=`YTM Clon ${song?.title}`>
   <BackPage />
   <div
-    class="grid grid-flow-row mr-20 lg:mr-0 lg:grid-cols-2 gap-10 w-full h-full items-center justify-items-center"
+    class="grid grid-flow-row mr-20 lg:mr-0 lg:grid-cols-2 gap-10 w-full h-[700px] items-center justify-items-center "
   >
-    <div class="flex flex-col px-7 relative order-2 lg:order-1">
-      <img src={song?.image} class="blur-xl min-w-[200px] h-auto lg:w-[750px] px-7 rounded-xl object-cover right-0 left-0 my-0 mx-auto -z-10 absolute" alt="">
+    <picture class="flex flex-col h-full px-7 relative  order-2 lg:order-1">
+      <img 
+      src={song?.image} 
+      class="animate-fade-in animate-delay-150 blur-[27px] min-w-[50px] h-auto lg:w-[700px] px-7 rounded-xl object-cover right-0 left-0 my-0 mx-auto -z-10 absolute" alt="">
 
-      <img
-        src={song?.image}
-        alt=""
+      <Image
+        src=`${song?.image}`
+        alt=`${song?.title} cover`
+        width={650}
+        height={650}
+        loading={"eager"}
         transition:name={`${id} image`}
-        class="min-w-[200px] h-auto lg:w-[700px] rounded-xl object-cover aspect-auto"
+        class=" min-w-[200px] h-auto lg:w-[650px] rounded-xl object-cover aspect-auto"
       />
       
       <p
@@ -36,7 +43,7 @@ const song = songs.find((song) => song.id.toString() === id);
       >
         {song?.artists}
       </p>
-    </div>
+    </picture>
     <div class="order-1 lg:order-2 w-full">
       <h1
         transition:name={`${id} title`}
@@ -44,7 +51,7 @@ const song = songs.find((song) => song.id.toString() === id);
       >
         {song?.title}
       </h1>
-      <div class=" hidden  h-dvh w-full lg:block lg:w-auto lg:h-[700px] overflow-hidden mt-10 rounded-2xl relative bottom-0 justify-start p-7 bg-gradient-to-b from-slate-800 to-slate-1000">
+      <div id="lyrics" class=" hidden  h-full w-full lg:block lg:w-auto lg:h-dvh overflow-auto mt-10 rounded-2xl relative bottom-0 justify-start p-7 bg-gradient-to-b from-slate-800 to-slate-1000">
         <p class="text-white text-2xl whitespace-pre-line">
           {song?.lyrics}
         </p>
@@ -52,3 +59,9 @@ const song = songs.find((song) => song.id.toString() === id);
     </div>
   </div>
 </Layout>
+
+<style>
+  #lyrics {
+    scrollbar-color: #4B5563 #1F2937;
+  }
+</style>

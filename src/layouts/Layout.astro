@@ -6,6 +6,8 @@ import LibraryIcon from "@/components/icons/LibraryIcon.astro";
 import LogoYTM from "@/components/icons/LogoYTM.astro";
 import MainIcon from "@/components/icons/MainIcon.astro";
 import ViewTransitions from "astro/components/ViewTransitions.astro";
+import Nav from "@/components/Nav.astro";
+import GitHubIcon from "@/components/icons/GitHubIcon.astro";
 
 interface Props {
   title: string;
@@ -28,24 +30,33 @@ const { title } = Astro.props;
   </head>
   <body class="overflow-x-hidden h-dvh">
     <div id="app" class="h-screen w-full gap-2">
-      <div class="[grid-area:content] relative">
+      <div class="relative">
         <div
           class="absolute top-0 bottom-0 -z-20 min-h-screen w-full bg-gray-50 dark:bg-gray-950
         bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(217,216,255,0.5),rgba(255,255,255,0.9))]
         dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
         >
         </div>
-        <header class="flex flex-row items-center p-4 gap-4 w-full fixed z-50">
+        <header class="flex flex-row justify-between lg:items-center p-4 gap-4 w-full fixed z-50">
+          <div class="flex items-center gap-4">
           <button class="rounded-full p-2 active:bg-gray-700 md:hover:bg-gray-700 transition-all">
             <BurguerIcon>
           </button>
           <a href="/" aria-label="Inicio">
-            <LogoYTM
+            <LogoYTM />
           </a>
-        
+        </div>
           <!-- Nav -->
-        
-        </header>
+          <div class="flex md:m-auto">
+<!--             <Nav />
+ -->          </div>
+          <div class="pr-4 flex">
+            <a href="https://github.com/TeGsOg1/YouTubeMusicClon"
+            target="_blank"
+            class="text-white bg-gray-800 p-2 rounded-full active:bg-gray-700 md:hover:bg-gray-700 transition-all"
+            aria-label="github"><GitHubIcon/></a>
+          </div>
+          </header>
 
         <aside
           transition:persist
@@ -89,9 +100,9 @@ const { title } = Astro.props;
           <slot />
         </main>
       </div>
-      <footer class="[grid-area:player] bg-gray-800 z-10">
+<!--       <footer class=" bg-gray-800 z-10">
         <Player client:load transition:name="media-player" transition:persist/>
-      </footer>
+      </footer> -->
     </div>
   </body>
 </html>
@@ -151,18 +162,9 @@ const { title } = Astro.props;
     background: #232323;
   }
 
-  #app {
-    display: grid;
-    grid-template-areas:
-      "content content content"
-      "content content content"
-      "player player player";
-    grid-template-columns: 250px 1fr 1fr;
-    grid-template-rows: 70px 1fr 70px;
-  }
 
   header {
-    
+    scrollbar-gutter: stable;
     animation: scrollBlur linear both;
     animation-timeline: scroll();
     animation-range: 0 50px;
@@ -173,15 +175,15 @@ const { title } = Astro.props;
 
   @keyframes scrollBlur {
     to {
-      box-shadow: 0, 0, 10px, 0, rgba(255, 255, 255, 0.5);
-      background: rgb(0, 0, 0);
+       background: rgba(0, 0, 0, 0.3);
+       backdrop-filter: blur(10px);
     }
   }
 
   @media (width < 782px)  {
     main {
       padding-left: 0 ;
-      justify-content: center !important;
+      justify-content: center;
     }
 
     aside {
