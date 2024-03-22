@@ -38,7 +38,7 @@ const song = songs.find((song) => song.id.toString() === id);
       />
       
       <p
-        class="text-gray-400 text-2xl text-center truncate lg:text-start flex flex-col lg:text-3xl lg:pt-4"
+        class="text-gray-400 text-2xl text-center text-wrap truncate lg:text-start flex flex-col lg:text-3xl lg:pt-4"
         transition:name={`${id} artist`}
       >
         {song?.artists}
