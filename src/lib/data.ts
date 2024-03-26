@@ -93,7 +93,7 @@ export const playlists: Playlist[] = [
     albumId: 10,
     title: "Danza Kuduro",
     color: colors.orange,
-    image: "https://lastfm.freetls.fastly.net/i/u/500x500/834d94f3d8e7491fc9214a86d4262d9b.jpg",
+    image: "https://lh3.googleusercontent.com/WZx94Asj29Zm7VkrxrEsk4dQzg0mPbGChm-1jhX8LQIgAkJ1mcRdq2o9CwAjZIUJm6O9pViJxxhuUto=w544-h544-l90-rj",
     artists: ["Don Omar"],
   },
   {
