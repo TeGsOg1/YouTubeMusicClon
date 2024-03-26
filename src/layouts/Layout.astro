@@ -65,31 +65,31 @@ const { title } = Astro.props;
           id="aside"
         >
           <ul>
-            <li>
+             <li class="w-full" >
               <a 
                 id="princ"
                 href="/"
-                class="flex  items-center rounded-lg gap-2 p-4 text-white hover:bg-gray-700 transition-all"
+                class=" flex items-center rounded-lg gap-2 p-4 w-full text-white hover:bg-gray-700 transition-all"
               >
                 <MainIcon />
                 <span id="princ-txt">Inicio</span>
               </a>
             </li>
-            <li>
+             <li class="w-full" >
               <a
                 id="expl"
                 href="/explorer"
-                class="flex  items-center rounded-lg gap-2 w-full p-4 text-white hover:bg-gray-700 transition-all"
+                class=" flex items-center rounded-lg gap-2 p-4 w-full text-white hover:bg-gray-700 transition-all"
               >
                 <ExplorerIcon />
                 <span id="expl-txt">Explorar</span>
               </a>
             </li>
-            <li>
+             <li class="w-full" >
               <a
                 id="lib"
                 href="/library"
-                class="flex  items-center rounded-lg gap-2 p-4 text-white hover:bg-gray-700 transition-all"
+                class=" flex items-center rounded-lg gap-2 p-4 w-full text-white hover:bg-gray-700 transition-all"
               >
                 <LibraryIcon />
                 <span id="lib-txt">Biblioteca</span>
@@ -106,7 +106,7 @@ const { title } = Astro.props;
           <Player client:load transition:name="media-player" transition:persist/>
         </div>
         <div class="w-full h-full md:hidden   ">
-          <ul class="flex row w-full items-center justify-items-center h-full justify-between px-5 sm:px-10 gap-5">
+          <ul class="flex row w-full items-center justify-items-center h-full justify-between px-10 ">
             <li class="p-5 rounded-full active:bg-slate-400 transition-colors"><a href="/" aria-label="icon"><MainIcon /></a></li>
             <li class="p-5  rounded-full active:bg-slate-400 transition-colors"><a href="/" aria-label="icon"><ExplorerIcon /></a></li>
             <li class="p-5 rounded-full active:bg-slate-400 transition-colors"><a href="/" aria-label="icon"><LibraryIcon /></a></li>

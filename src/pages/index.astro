@@ -8,9 +8,8 @@ import { playlists } from "@/lib/data";
   <h1 class="block text-xl md:text-4xl font-bold text-white">
     YouTube Music Clon
   </h1>
-  <div class="flex flex-row overflow-x-auto gap-2" id="canciones">
-    {playlists.map((song) => <Musics song={song} />)}
-
+  <div class="flex flex-row overflow-x-auto gap-2 " id="canciones">
+    {playlists.sort(() => Math.random() - 0.5).map((song) => <Musics song={song} />)}
     <h1 id="NoMusic" class="hidden text-white text-2xl">No se enontraron resultados</h1>
   </div>
 </Layout>

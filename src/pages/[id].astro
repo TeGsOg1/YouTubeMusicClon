@@ -51,7 +51,7 @@ const song = songs.find((song) => song.id.toString() === id);
       >
         {song?.title}
       </h1>
-      <div id="lyrics" class=" hidden  h-full w-full lg:block lg:w-auto lg:h-dvh overflow-auto mt-10 rounded-2xl relative bottom-0 justify-start p-7 bg-gradient-to-b from-slate-800 to-slate-1000">
+      <div id="lyrics" class=" hidden lg:block h-full w-full lg:w-auto lg:h-dvh overflow-auto mt-10 rounded-2xl relative bottom-0 justify-start p-7 bg-gradient-to-b from-slate-800 to-slate-1000">
         <p class="text-white text-2xl whitespace-pre-line">
           {song?.lyrics}
         </p>
