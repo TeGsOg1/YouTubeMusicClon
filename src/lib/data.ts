@@ -1,10 +1,7 @@
-import { colors } from "./colors";
-
 export interface Playlist {
   id: string;
   albumId: number;
   title: string;
-  color: (typeof colors)[keyof typeof colors];
   image: string;
   artists: string[];
 }
@@ -14,7 +11,6 @@ export const playlists: Playlist[] = [
     id: '1',
     albumId: 1,
     title: "The Nights",
-    color: colors.yellow,
     image:
       "https://i.scdn.co/image/ab67616d0000b2730ae4f4d42e4a09f3a29f64ad",
     artists: ["Avicii"],
@@ -23,7 +19,6 @@ export const playlists: Playlist[] = [
     id: '2',
     albumId: 2,
     title: "Cupid (Twin Ver.)",
-    color: colors.green,
     image:
       "https://i.scdn.co/image/ab67616d0000b27337c0b3670236c067c8e8bbcb",
     artists: ["FIFTY-FIFTY"],
@@ -32,7 +27,6 @@ export const playlists: Playlist[] = [
     id: '3',
     albumId: 3,
     title: "Tu Falta de Querer",
-    color: colors.rose,
     image:
       "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/6c/e6/c7/6ce6c71b-9c90-9040-622e-524f1a878135/15UMGIM37781.rgb.jpg/1200x1200bf-60.jpg",
     artists: ["Mon Laferte"],
@@ -41,7 +35,6 @@ export const playlists: Playlist[] = [
     id: '4',
     albumId: 4,
     title: "Until I Found You (Piano Version)",
-    color: colors.blue,
     image:
       "https://i.scdn.co/image/ab67616d0000b273eabddae72a3b1a5ed51d1ac6",
     artists: ["Stephen Sanchez"],
@@ -50,7 +43,6 @@ export const playlists: Playlist[] = [
     id: '5',
     albumId: 5,
     title: "Un Osito de Peluche de Taiwán",
-    color: colors.purple,
     image:
       "https://www.losautenticosdecadentes.com.ar/img/albumes/sigue-tu-camino.jpg",
     artists: ["Los Auténticos Decadentes"],
@@ -59,7 +51,6 @@ export const playlists: Playlist[] = [
     id: '6',
     albumId: 6,
     title: "King Of The Jungle",
-    color: colors.orange,
     image:
       "https://i.scdn.co/image/ab67616d0000b273c75d7b12b6b6eacea1e21068",
     artists: ["Shanguy"],
@@ -68,7 +59,6 @@ export const playlists: Playlist[] = [
     id: '7',
     albumId: 7,
     title: "Vivir Mi Vida",
-    color: colors.red,
     image: "https://i.scdn.co/image/ab67616d0000b27321be16e998effa9f1f4b63a9",
     artists: ["Marc Anthony"],
   },
@@ -76,7 +66,6 @@ export const playlists: Playlist[] = [
     id: '8',
     albumId: 8,
     title: "La Camisa Negra",
-    color: colors.red,
     image: "https://i.scdn.co/image/ab67616d0000b273c091c40987e92a9256d2f210",
     artists: ["Juanes"],
   },
@@ -84,7 +73,6 @@ export const playlists: Playlist[] = [
     id: '9',
     albumId: 9,
     title: "Bailando",
-    color: colors.blue,
     image: "https://i.scdn.co/image/ab67616d0000b273c725c87a1394f9558e7fa9c8",
     artists: ["Enrique Iglesias"],
   },
@@ -92,7 +80,6 @@ export const playlists: Playlist[] = [
     id: '10',
     albumId: 10,
     title: "Danza Kuduro",
-    color: colors.orange,
     image: "https://lh3.googleusercontent.com/WZx94Asj29Zm7VkrxrEsk4dQzg0mPbGChm-1jhX8LQIgAkJ1mcRdq2o9CwAjZIUJm6O9pViJxxhuUto=w544-h544-l90-rj",
     artists: ["Don Omar"],
   },
@@ -100,7 +87,6 @@ export const playlists: Playlist[] = [
     id: '11',
     albumId: 11,
     title: "Limón y Sal",
-    color: colors.green,
     image: "https://i.scdn.co/image/ab67616d0000b273a043fa84be801dca33dacca1",
     artists: ["Julieta Venegas"],
   },
@@ -108,7 +94,6 @@ export const playlists: Playlist[] = [
     id: '12',
     albumId: 12,
     title: "Matador",
-    color: colors.purple,
     image: "https://images.genius.com/5e94e386f9f2c1199cf15eb98286ec73.960x960x1.png",
     artists: ["Los Fabulosos Cadillacs"],
   },
