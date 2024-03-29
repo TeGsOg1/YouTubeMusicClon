@@ -22,9 +22,14 @@ const { title, artists, image, id } = song
     transition:name=`${ id } image`
     loading="eager"
       />
-  <h1 class="text-white justify-start text-xl mt-1"
+  <h1 class="text-white justify-start text-lg  sm:text-xl mt-1"
     transition:name=`${ id } title`
   >{ title }</h1>
-  <p class="text-xl z-30 text-gray-400 hover:text-gray-300 active:text-gray-300 transition-colors"  transition:name=`${ id } artist`>{ artists }</p>
+  <p 
+   class="text-md sm:text-xl z-30 text-gray-400 hover:text-gray-300 active:text-gray-300 transition-colors" 
+   transition:name=`${ id } artist`
+   >
+     { artists }
+  </p>
 </a>
 </article>
