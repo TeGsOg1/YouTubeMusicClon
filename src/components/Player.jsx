@@ -1,5 +1,5 @@
 import { usePlayerStore } from "@/store/playerStore";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 
 export const Pause = () => (
@@ -65,7 +65,7 @@ const CurrentSong = ({ image, title }) => {
 }
 
 export function Player() {
-  const { currentMusic, isPlaying, setIsPlaying, volume } = usePlayerStore(state => state)
+  const { currentMusic, isPlaying, setIsPlaying } = usePlayerStore(state => state)
   const audioRef = useRef()
 
   useEffect(() => {
@@ -76,7 +76,7 @@ export function Player() {
 
 
   useEffect(() => {
-    const { song, playlist, songs } = currentMusic
+    const { song } = currentMusic
     if (song) {
       const src = `/music/${song.id}.mp3`
       audioRef.current.src = src
