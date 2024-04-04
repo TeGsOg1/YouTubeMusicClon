@@ -48,8 +48,8 @@ const { title } = Astro.props;
           </div>
           <!-- Nav -->
           <div class="flex md:m-auto">
-<!--             <Nav />
- -->      </div>
+             <Nav />
+    </div>
           <div class="pr-4 flex">
             <a href="https://github.com/TeGsOg1/YouTubeMusicClon"
             target="_blank"
@@ -64,7 +64,7 @@ const { title } = Astro.props;
           id="aside"
         >
           <ul>
-             <li class="w-full" >
+            <li class="w-full" >
               <a 
                 id="princ"
                 href="/"
@@ -100,8 +100,8 @@ const { title } = Astro.props;
           <slot />
         </main>
       </div>
-      <footer class="fixed md:hidden bottom-0 flex w-full h-20 bg-gray-800 z-10">
-        <div class="hidden">
+      <footer class="fixed  bottom-0 flex w-full h-20 bg-gray-800 z-10">
+        <div class="w-full hidden md:block ">
           <Player client:load transition:name="media-player" transition:persist/>
         </div>
         <div class="w-full h-full md:hidden   ">
