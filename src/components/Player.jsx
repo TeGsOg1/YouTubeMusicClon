@@ -74,11 +74,10 @@ export function Player() {
       : audioRef.current.pause()
   }, [isPlaying])
 
-
   useEffect(() => {
-    const { song } = currentMusic
+    const { song, playlist, songs } = currentMusic
     if (song) {
-      const src = `/music/${song.id}.mp3`
+      const src = `/music/${playlist?.id}/${song.id}.mp3`
       audioRef.current.src = src
       audioRef.current.play()
     }

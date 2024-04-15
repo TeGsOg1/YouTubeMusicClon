@@ -14,11 +14,10 @@ export function CardPlayButton ({ id }) {
             setIsPlaying(false);
         }
 
-        fetch(`/api/songs-info.json?id=${id}`)
+        fetch(`/api/songs-info.json?id=$ {id}`)
             .then(res => res.json())
             .then(data => {
                 const { songs, playlist, song } = data;
-
                 setIsPlaying(true)
                 setCurrentMusic({ songs, playlist, song: songs[0] })
                 console.log({isPlaying, currentMusic})
@@ -26,7 +25,7 @@ export function CardPlayButton ({ id }) {
 
     }
 
-    const isPlayingSong = isPlaying && currentMusic?.playlist?.id === id
+    const isPlayingSong = isPlaying && currentMusic?.playlist.id === id
 
     return(
         <button onClick={handleClick} className=' p-10 w-full bg-slate-400'>
