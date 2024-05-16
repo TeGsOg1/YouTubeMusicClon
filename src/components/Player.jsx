@@ -1,4 +1,4 @@
-import { usePlayerStore } from "@/store/playerStore";
+import { usePlayerStore } from "@/store/PlayerStore";
 import { useEffect, useRef } from "react";
 
 
