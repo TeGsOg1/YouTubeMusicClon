@@ -2,13 +2,12 @@ import { allPlaylists, songs as allSongs } from "@/lib/data";
 
 export async function GET({ params, request }) {
   const { url } = request
-    const urlObject = new URL(url)
-    const id = urlObject.searchParams.get('id')
-  
-    const playlist = allPlaylists.find((playlist) => playlist.id === id)
-    const songs = allSongs.filter(song => song.albumId === playlist?.albumId)
+  const urlObject = new URL(url)
+  const id = urlObject.searchParams.get('id')
 
-    return new Response(JSON.stringify({ playlist, songs }), {
-      headers: { "content-type": "application/json" },
-    })
-  }
+  const song = allSongs.find((song) => song.id === id)
+
+  return new Response(JSON.stringify({ song }), {
+    headers: { "content-type": "application/json" },
+  })
+}
