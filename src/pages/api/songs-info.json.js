@@ -1,13 +1,12 @@
 import { allPlaylists, songs as allSongs } from "@/lib/data";
+import { APIRoute } from "astro"
 
-export async function GET({ params, request }) {
-  const { url } = request
-  const urlObject = new URL(url)
-  const id = urlObject.searchParams.get('id')
+export const GET: APIRoute = async ({ params, request }) => {
+    const { url } = request
+    const urlObject = new URL(url)
+    const id = urlObject.searchParams.get('id')
+  
+    const song = allSongs.find((song: { id: string; }) => song.id === id)
 
-  const song = allSongs.find((song) => song.id === id)
-
-  return new Response(JSON.stringify({ song }), {
-    headers: { "content-type": "application/json" },
-  })
+    return new Response(JSON.stringify({ song }))
 }
