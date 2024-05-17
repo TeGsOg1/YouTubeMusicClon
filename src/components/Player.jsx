@@ -52,9 +52,9 @@ export const Play = () => (
 const CurrentSong = ({ image, title }) => {
   console.log({ image, title })
   return(
-    <div>
-      <picture className="w-16 h-16 rounded-full bg-slate-500">
-        <img src={image} alt={ title } />
+    <div className="flex flex-row items-center gap-4 pt-2">
+      <picture className="w-16 h-16 bg-slate-500 ">
+        <img src={image} className="h-16 w-20" alt={ title } />
       </picture>
       <h3>
         {title}
@@ -75,11 +75,12 @@ export function Player() {
   }, [isPlaying])
 
   useEffect(() => {
-    const { song, playlist, songs } = currentMusic
+    const { song, playlist } = currentMusic
     if (song) {
-      const src = `/music/${playlist?.id}/${song.id}.mp3`
+      const src = `/music/${song.id}/${song.id}.mp3`
       audioRef.current.src = src
       audioRef.current.play()
+      console.log(audioRef)
     }
   }, [currentMusic])
 

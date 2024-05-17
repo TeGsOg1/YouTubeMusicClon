@@ -77,7 +77,7 @@ const { title } = Astro.props;
              <li class="w-full" >
               <a
                 id="expl"
-                href="/explorer"
+                href="#"
                 class=" flex items-center rounded-lg gap-2 p-4 w-full text-white hover:bg-gray-700 transition-all"
               >
                 <ExplorerIcon />
@@ -87,7 +87,7 @@ const { title } = Astro.props;
              <li class="w-full" >
               <a
                 id="lib"
-                href="/library"
+                href="#"
                 class=" flex items-center rounded-lg gap-2 p-4 w-full text-white hover:bg-gray-700 transition-all"
               >
                 <LibraryIcon />
@@ -129,14 +129,6 @@ const { title } = Astro.props;
   const principal = document.querySelector('#princ');
 
   const $main = document.querySelector('main');
-
-  const isAsideOpen = localStorage.getItem('isAsideOpen') === 'true';
-    if (isAsideOpen) {
-      $aside?.classList.toggle('w-[60px]', isAsideOpen);
-      explorerText?.classList.toggle('hidden', !isAsideOpen);
-      libraryText?.classList.toggle('hidden', !isAsideOpen);
-      principalText?.classList.toggle('hidden', !isAsideOpen);
-    }
 
   button?.addEventListener('click', () => {
     if(screen.width > 782) {
