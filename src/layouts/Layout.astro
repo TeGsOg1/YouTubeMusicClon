@@ -96,7 +96,7 @@ const { title } = Astro.props;
             </li>
           </ul>
         </aside>
-        <main class="flex flex-col w-full gap-4 py-20 p-4 mb-20 lg:pl-72 transition-all overflow-hidden">
+        <main class="flex flex-col w-full gap-4 py-20 p-4 mb-20 md:pl-72 transition-all overflow-hidden">
           <slot />
         </main>
       </div>
@@ -136,7 +136,7 @@ const { title } = Astro.props;
     explorerText?.classList.toggle('hidden');
     libraryText?.classList.toggle('hidden');
     principalText?.classList.toggle('hidden');
-    $main?.classList.toggle('lg:pl-[90px]');      
+    $main?.classList.toggle('md:pl-[90px]');
     }
     else {
       $aside?.classList.toggle('left-0');

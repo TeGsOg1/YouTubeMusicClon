@@ -50,7 +50,11 @@ export const Play = () => (
 );
 
 const CurrentSong = ({ image, title }) => {
-  console.log({ image, title })
+  
+
+  if(image===undefined) {
+    return
+  }
   return(
     <div className="flex flex-row items-center gap-4 pt-2">
       <picture className="w-16 h-16 bg-slate-500 ">
@@ -80,7 +84,6 @@ export function Player() {
       const src = `/music/${song.id}/${song.id}.mp3`
       audioRef.current.src = src
       audioRef.current.play()
-      console.log(audioRef)
     }
   }, [currentMusic])
 
@@ -90,7 +93,7 @@ export function Player() {
 
 
   return (
-    <div className="flex flex-row w-full px-4 justify-between z-40 text-white">
+    <div className="flex flex-row w-full px-4 justify-between z-50 text-white">
       <div className="hidden md:block md:w-[200px]"> 
       <CurrentSong {...currentMusic.song} />
       </div>
@@ -103,7 +106,7 @@ export function Player() {
         </div>
       </div>
 
-      <div className="hidden lg:grid lg:place-content-center">VOLUME</div>
+      <div className="grid place-content-center">VOLUME</div>
     </div>
   );
 }
