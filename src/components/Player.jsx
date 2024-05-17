@@ -87,7 +87,6 @@ export function Player() {
     setIsPlaying(!isPlaying)
   }
 
-  if(!isPlaying) return
 
   return (
     <div className="flex flex-row w-full px-4 justify-between z-50 text-white">
