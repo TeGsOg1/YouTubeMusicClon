@@ -21,14 +21,13 @@ export function CardPlayButton({ id }) {
                 const { songs, playlist, song } = data;
                 setIsPlaying(true)
                 setCurrentMusic({ songs, playlist, song: songs[id-1] })
-                console.log({isPlaying, currentMusic})
-        });
+    });
 
     }
 
     return(
-        <button onClick={handleClick} className=' p-10 w-full bg-slate-400'>
+        <a href={`/song/${id}`} onClick={handleClick} className=' bg-slate-400'>
       {isPlaying ? <Pause /> : <Play />}
-    </button>
+    </a>
   );
 }

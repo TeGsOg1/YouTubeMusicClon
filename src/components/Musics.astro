@@ -13,7 +13,7 @@ const { title, artists, image, id } = song
 ---
 
 <article class="flex flex-col relative min-w-48 h-auto p-2 rounded-lg bg-opacity-10 bg-gradient-to-b from-gray-700 to-transparent hover:bg-opacity-100  transition-all">
-    <div class="absolute z-10 opacity-0 active:opacity-85 md:hover:opacity-85 inset-0 p-2 ">
+    <div class="absolute z-10 opacity-0 active:opacity-85 w-44 h-44 md:hover:opacity-85 inset-0 ml-2 mt-2 p-10 bg-slate-400 ">
       <CardPlayButton id=`${id}` client:visible />
     </div>
   <picture class="relative">
@@ -30,11 +30,10 @@ const { title, artists, image, id } = song
   <h1 class="text-white justify-start text-lg  sm:text-xl mt-1"
     transition:name=`${ id } title`
   >{ title }</h1>
-  <a 
-   href={`/song/${ id }`}
-   class="text-md sm:text-xl z-20 text-gray-400 hover:text-gray-300 active:text-gray-300 transition-colors" 
+  <h2 
+   class="text-md sm:text-xl text-gray-400 hover:text-gray-300 active:text-gray-300 transition-colors" 
    transition:name=`${ id } artist`
    >
      { artists }
-  </a>
+  </h2>
 </article>

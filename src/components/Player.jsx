@@ -51,16 +51,12 @@ export const Play = () => (
 
 const CurrentSong = ({ image, title }) => {
   
-
-  if(image===undefined) {
-    return
-  }
   return(
-    <div className="flex flex-row items-center gap-4 pt-2">
+    <div className="flex flex-row items-center gap-4 pt-2 max-w-52">
       <picture className="w-16 h-16 bg-slate-500 ">
         <img src={image} className="h-16 w-20" alt={ title } />
       </picture>
-      <h3>
+      <h3 className=" text-ellipsis">
         {title}
       </h3>
     </div>
@@ -91,6 +87,7 @@ export function Player() {
     setIsPlaying(!isPlaying)
   }
 
+  if(!isPlaying) return
 
   return (
     <div className="flex flex-row w-full px-4 justify-between z-50 text-white">
