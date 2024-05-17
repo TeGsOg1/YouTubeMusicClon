@@ -15,7 +15,7 @@ export function CardPlayButton({ id }) {
       setIsPlaying(false);
         }
 
-        fetch(`/api/songs-info.json?id=${id}`)
+        fetch(`/api/getSongsInfo.json?id=${id}`)
         .then(res => res.json())
         .then(data => {
                 const { songs, playlist, song } = data;
