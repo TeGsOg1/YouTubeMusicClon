@@ -4,6 +4,7 @@ import Layout from "@/layouts/Layout.astro";
 import { songs } from "@/lib/data";
 import BackPage from "@/components/BackPage.astro"
 import Image from "astro/components/Image.astro";
+import { PlayerMobile } from "@/components/PlayerControls";
 
 
 export const getStaticPaths: GetStaticPaths = () => {
@@ -21,7 +22,7 @@ const song = songs.find((song) => song.id.toString() === id);
   <div
     class="grid grid-flow-row mr-20 lg:mr-0 lg:grid-cols-2 gap-10 w-full  "
   >
-    <picture class="flex flex-col h-full px-7 relative  order-2 lg:order-1 items-center justify-items-center">
+    <div class="flex flex-col h-full px-7 relative  order-2 lg:order-1 items-center justify-items-center">
       <img 
       src={song?.image} 
       class="animate-fade-in animate-delay-150 blur-[27px] min-w-[50px] h-auto lg:w-[700px] px-7 rounded-xl object-cover right-0 left-0 my-0 mx-auto -z-10 absolute" alt="">
@@ -39,19 +40,22 @@ const song = songs.find((song) => song.id.toString() === id);
       <p
         class="text-gray-400 text-2xl text-center text-wrap truncate lg:text-start flex flex-col lg:text-3xl lg:pt-4"
         transition:name={`${id} artist`}
-      >
+        >
         {song?.artists}
       </p>
-    </picture>
-    <div class="order-1 lg:order-2 w-full  h-auto max-h-[1400px]">
-      <h1
-        transition:name=`${id} title`
-        class="text-3xl md:text-5xl text-pretty lg:text-5xl text-center lg:text-start pb-10 text-white max-w-90"
-      >
-        {song?.title}
-      </h1>
+      <div class="block md:hidden">
+        <PlayerMobile client:load transition:name="media-player-mobile" transition:persist/>
+      </div>
+    </div>
+  <div class="order-1 lg:order-2 w-full  h-auto max-h-[1400px]">
+    <h1
+    transition:name=`${id} title`
+    class=" md:hidden text-3xl md:text-5xl text-pretty lg:text-5xl text-center lg:text-start text-white max-w-90"
+    >
+    {song?.title}
+  </h1>
       <div id="lyrics" class="hidden lg:block h-auto max-h-[600px] overflow-y-auto p-5 rounded-2xl bg-gradient-to-b from-slate-800 to-transparent">
-        <p class="text-white text-3xl whitespace-pre-line ">
+        <p class="text-white text-2xl whitespace-pre-line ">
           {song?.lyrics}
         </p>
       </div>

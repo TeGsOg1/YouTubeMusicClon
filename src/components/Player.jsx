@@ -52,14 +52,14 @@ export const Play = () => (
 const CurrentSong = ({ image, title }) => {
   
   return(
-    <div className="flex flex-row items-center gap-4 pt-2 max-w-52">
+    <section className="flex flex-row items-center gap-4 pt-2 max-w-52">
       <picture className="w-16 h-16 bg-slate-500 ">
         <img src={image} className="h-16 w-20" alt={ title } />
       </picture>
       <h3 className=" text-ellipsis">
         {title}
       </h3>
-    </div>
+    </section>
   )
 
 }
@@ -102,7 +102,7 @@ export function Player() {
         </div>
       </div>
 
-      <div className="grid place-content-center">VOLUME</div>
+      <div className="md:grid hidden place-content-center">VOLUME</div>
     </div>
   );
 }

@@ -100,15 +100,15 @@ const { title } = Astro.props;
           <slot />
         </main>
       </div>
-      <footer class="fixed  bottom-0 flex w-full h-20 bg-gray-800 z-10">
+      <footer class="fixed  bottom-0 flex w-full h-14 md:h-20 bg-gray-800 z-10">
         <div class="w-full hidden md:block ">
           <Player client:load transition:name="media-player" transition:persist/>
         </div>
         <div class="w-full h-full md:hidden   ">
           <ul class="flex row w-full items-center justify-items-center h-full justify-between px-10 ">
-            <li class="p-5 rounded-full active:bg-slate-400 transition-colors"><a href="/" aria-label="icon"><MainIcon /></a></li>
-            <li class="p-5  rounded-full active:bg-slate-400 transition-colors"><a href="/" aria-label="icon"><ExplorerIcon /></a></li>
-            <li class="p-5 rounded-full active:bg-slate-400 transition-colors"><a href="/" aria-label="icon"><LibraryIcon /></a></li>
+            <li class="p-3 rounded-full active:bg-slate-400 transition-colors"><a href="/" aria-label="icon"><MainIcon /></a></li>
+            <li class="p-3  rounded-full active:bg-slate-400 transition-colors"><a href="/" aria-label="icon"><ExplorerIcon /></a></li>
+            <li class="p-3 rounded-full active:bg-slate-400 transition-colors"><a href="/" aria-label="icon"><LibraryIcon /></a></li>
           </ul>
         </div>
       </footer>
