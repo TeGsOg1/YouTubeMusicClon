@@ -94,7 +94,7 @@ const VolumeControls = () => {
   return (
     <div className="flex justify-center justify-items-center  text-white gap-3">
         <button className=" cursor-default">
-          {volume < 0.1 ? <VolumeMute /> : <Volume />}
+          {volume === 0 ? <VolumeMute /> : <Volume />}
         </button>
       <Slider
         defaultValue={[100]}
