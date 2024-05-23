@@ -140,8 +140,10 @@ export function Player() {
     setIsPlaying(!isPlaying);
   };
 
+  if(!currentMusic.song) return
+
   return (
-    <div className="flex flex-row w-full px-4 justify-between z-50 text-white">
+    <div className="flex flex-row w-full h-20 px-4 justify-between z-50 text-white">
       <div className="hidden md:block ">
         <CurrentSong {...currentMusic.song} />
       </div>
