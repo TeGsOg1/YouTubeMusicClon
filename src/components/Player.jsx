@@ -1,5 +1,5 @@
 import { usePlayerStore } from "@/store/PlayerStore";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Slider } from "./Slider";
 
 export const Pause = () => (
@@ -76,13 +76,16 @@ export const Volume = () => (
     />
   </svg>
 );
-const CurrentSong = ({ image, title }) => {
+const CurrentSong = ({ image, title, artists }) => {
   return (
-    <section className="flex flex-row items-center gap-4 pt-2 w-[300px]">
+    <section className="flex flex-row items-center gap-4 pt-2 w-[200px]">
       <div className="min-w-16 min-h-16 bg-slate-500 ">
         <img src={image} className="h-16 w-16" alt={title} />
       </div>
-      <span className="truncate">{title}</span>
+      <div className="flex flex-col">
+        <span className="truncate">{title}</span>
+        <span className="opacity-80">{artists}</span>
+      </div>
     </section>
   );
 };
@@ -124,11 +127,58 @@ const VolumeControls = () => {
   );
 };
 
+export const AudioControls = ({audio}) => {
+  const [ currentTime, setCurrentTime ] = useState(0);
+
+  const handleTimeUpdate = () => {
+    setCurrentTime(audio.current.currentTime)
+  }
+
+  useEffect(() => {
+    audio.current.addEventListener('timeupdate', handleTimeUpdate)
+    return () => {
+      audio.current.removeEventListener('timeupdate', handleTimeUpdate)
+    }
+  }, []);
+
+  const formatTime = time => {
+    if(time == null) return '00:00';
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+  }
+
+  const duration = audio?.current?.duration ?? 0;
+
+  return(
+    <div className="flex flex-row gap-4">
+      
+      <span className=" opacity-70">{formatTime(currentTime)}</span>
+      
+      <Slider
+        value={[currentTime]}
+        min={0}
+        max={audio?.current?.duration ?? 0}
+        className="w-[100px] md:w-[400px]"
+        onValueChange={(value) => {
+          const [newTimeUpdate] = value;
+          audio.current.currentTime = newTimeUpdate;
+        }}
+      />
+
+      <span className="opacity-70">{formatTime(duration)}</span>
+    </div>
+  )
+}
+
 export function Player() {
-  const { currentMusic, isPlaying, setIsPlaying, volume } = usePlayerStore(
-    (state) => state
-  );
-  const audioRef = useRef();
+  const { currentMusic, isPlaying, setIsPlaying, volume, setAudioRef } = usePlayerStore();
+    const audioRef = useRef(null);
+
+    useEffect(() => {
+        setAudioRef(audioRef);
+    }, [setAudioRef]);
+
 
 
   useEffect(() => {
@@ -145,6 +195,7 @@ export function Player() {
     }
   }, [currentMusic]);
 
+
   useEffect(() => {
     audioRef.current.volume = volume;
   }, [volume]);
@@ -152,20 +203,20 @@ export function Player() {
   const handleClick = () => {
     setIsPlaying(!isPlaying);
   };
-
+  
   if(!currentMusic.song) return
-
   return (
-    <div className="flex flex-row w-full h-20 px-4 justify-between z-50 text-white">
+    <div className="flex flex-row w-full h-20 px-4 gap-4 justify-between z-50 text-white">
       <div className="hidden md:block ">
         <CurrentSong {...currentMusic.song} />
       </div>
       <div className="grid place-content-center ">
-        <div className="flex flex-row justify-center items-center">
+        <div className="flex flex-col justify-center items-center">
           <button className="w-10 " onClick={handleClick}>
             {isPlaying ? <Pause /> : <Play />}
           </button>
           <audio ref={audioRef} />
+          <AudioControls audio={audioRef} />
         </div>
       </div>
 
