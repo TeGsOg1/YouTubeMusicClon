@@ -1,6 +1,7 @@
 import { usePlayerStore } from "@/store/PlayerStore";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Slider } from "./Slider";
+import { set } from "astro/zod";
 
 export const Pause = () => (
   <svg
@@ -124,6 +125,51 @@ const VolumeControls = () => {
   );
 };
 
+/* const AudioControls = ({audio}) => {
+  const [ currentTime, setCurrentTime ] = useState(0);
+
+  const handleTimeUpdate = () => {
+    setCurrentTime(audio.current.currentTime)
+  }
+
+  useEffect(() => {
+    audio.current.addEventListener('timeupdate', handleTimeUpdate)
+    return () => {
+      audio.current.removeEventListener('timeupdate', handleTimeUpdate)
+    }
+  }, [audio]);
+
+  const formatTime = time => {
+    if(time == null) return '00:00';
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+  }
+
+  const duration = audio?.current?.duration ?? 0;
+
+  return(
+    <div className="flex flex-row gap-4">
+      
+      <span>{formatTime(currentTime)}</span>
+      
+      <Slider
+        defaultValue={[0]}
+        min={0}
+        max={audio?.current?.duration ?? 0}
+        value={[currentTime]}
+        className="w-[500px]"
+        onValueChange={(value) => {
+          const [newTimeUpdate] = value;
+          audio.current.currentTime = newTimeUpdate;
+        }}
+      />
+
+      <span>{formatTime(duration)}</span>
+    </div>
+  )
+} */
+
 export function Player() {
   const { currentMusic, isPlaying, setIsPlaying, volume } = usePlayerStore(
     (state) => state
@@ -153,7 +199,7 @@ export function Player() {
     setIsPlaying(!isPlaying);
   };
 
-  if(!currentMusic.song) return
+/*   if(!currentMusic.song) return */
 
   return (
     <div className="flex flex-row w-full h-20 px-4 justify-between z-50 text-white">
@@ -161,7 +207,7 @@ export function Player() {
         <CurrentSong {...currentMusic.song} />
       </div>
       <div className="grid place-content-center ">
-        <div className="flex flex-row justify-center items-center">
+        <div className="flex flex-col justify-center items-center">
           <button className="w-10 " onClick={handleClick}>
             {isPlaying ? <Pause /> : <Play />}
           </button>
@@ -169,7 +215,7 @@ export function Player() {
         </div>
       </div>
 
-      <div className="flex ">
+      <div className="flex">
         <VolumeControls />
       </div>
     </div>
