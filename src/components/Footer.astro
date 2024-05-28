@@ -1,0 +1,10 @@
+---
+import { Player } from '@/components/Player'
+import NavMobile from './NavMobile.astro'
+---
+<footer class="fixed  bottom-0 flex w-full md:max-h-20 bg-gray-800 z-10">
+    <div class="w-full hidden md:block ">
+      <Player client:load transition:name="media-player" transition:persist/>
+    </div>
+    <NavMobile />
+</footer>
