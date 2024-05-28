@@ -2,14 +2,10 @@
 import { ViewTransitions } from 'astro:transitions';
 
 import { Player } from "@/components/Player";
-import BurguerIcon from "@/components/icons/BurguerIcon.astro";
-import ExplorerIcon from "@/components/icons/ExplorerIcon.astro";
-import LibraryIcon from "@/components/icons/LibraryIcon.astro";
-import LogoYTM from "@/components/icons/LogoYTM.astro";
-import MainIcon from "@/components/icons/MainIcon.astro";
-import GitHubIcon from "@/components/icons/GitHubIcon.astro";
-import { usePlayerStore } from '@/store/PlayerStore';
-import { computeCurrentLocale } from 'node_modules/astro/dist/i18n/utils';
+import NavBar from '@/components/NavBar.astro';
+import Aside from '@/components/Aside.astro';
+import NavMobile from '@/components/NavMobile.astro';
+import Backgound from '@/components/Backgound.astro';
 
 interface Props {
   title: string;
@@ -33,71 +29,9 @@ const { title } = Astro.props;
   <body class="overflow-x-hidden h-dvh">
     <div id="app" class="h-screen w-full gap-2">
       <div class="relative">
-        <div
-          class="absolute top-0 bottom-0 -z-20 min-h-screen w-full bg-gray-950
-        bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
-        >
-        </div>
-        <header class="flex flex-row justify-between lg:items-center p-4 gap-4 w-full fixed z-50">
-          <div class="flex items-center gap-4">
-            <button class="hidden md:block rounded-full p-2 active:bg-gray-700 md:hover:bg-gray-700 transition-all">
-              <BurguerIcon>
-            </button>
-            <a href="/" aria-label="Inicio">
-              <LogoYTM />
-            </a>
-          </div>
-          <!-- Nav -->
-          <div class="flex md:m-auto">
-            <!-- ACA VA EL NAV -->
-
-          </div>
-          <div class="pr-4 flex">
-            <a href="https://github.com/TeGsOg1/YouTubeMusicClon"
-            target="_blank"
-            class="text-white bg-gray-800 p-2 rounded-full active:bg-gray-700 md:hover:bg-gray-700 transition-all"
-            aria-label="github"><GitHubIcon/></a>
-          </div>
-          </header>
-
-        <aside
-          transition:persist
-          class="flex flex-row fixed bg-gray-600 w-60 mt-20 ml-2 z-10 transition-all rounded-lg"
-          id="aside"
-        >
-          <ul>
-            <li class="w-full" >
-              <a 
-                id="princ"
-                href="/"
-                class=" flex items-center rounded-lg gap-2 p-4 w-full text-white hover:bg-gray-700 transition-all"
-              >
-                <MainIcon />
-                <span id="princ-txt">Inicio</span>
-              </a>
-            </li>
-             <li class="w-full" >
-              <a
-                id="expl"
-                href="#"
-                class=" flex items-center rounded-lg gap-2 p-4 w-full text-white hover:bg-gray-700 transition-all"
-              >
-                <ExplorerIcon />
-                <span id="expl-txt">Explorar</span>
-              </a>
-            </li>
-             <li class="w-full" >
-              <a
-                id="lib"
-                href="#"
-                class=" flex items-center rounded-lg gap-2 p-4 w-full text-white hover:bg-gray-700 transition-all"
-              >
-                <LibraryIcon />
-                <span id="lib-txt">Biblioteca</span>
-              </a>
-            </li>
-          </ul>
-        </aside>
+        <Backgound />
+        <NavBar />
+        <Aside />
         <main class="flex flex-col w-full gap-4 py-20 p-4 mb-20 md:pl-72 transition-all overflow-hidden">
           <slot />
         </main>
@@ -107,13 +41,7 @@ const { title } = Astro.props;
         <div class="w-full hidden md:block ">
           <Player client:load transition:name="media-player" transition:persist/>
         </div>
-        <div class="w-full h-14 md:hidden   ">
-          <ul class="flex row w-full items-center justify-items-center h-full justify-between px-10 ">
-            <li class="p-3 rounded-full active:bg-slate-400 transition-colors"><a href="/" aria-label="icon"><MainIcon /></a></li>
-            <li class="p-3  rounded-full active:bg-slate-400 transition-colors"><a href="/" aria-label="icon"><ExplorerIcon /></a></li>
-            <li class="p-3 rounded-full active:bg-slate-400 transition-colors"><a href="/" aria-label="icon"><LibraryIcon /></a></li>
-          </ul>
-        </div>
+        <NavMobile />
       </footer>
     </div>
   </body>
@@ -140,6 +68,9 @@ const { title } = Astro.props;
     libraryText?.classList.toggle('hidden');
     principalText?.classList.toggle('hidden');
     $main?.classList.toggle('md:pl-[90px]');
+    explorer?.classList.toggle('px-[18px]');
+    library?.classList.toggle('px-[18px]');
+    principal?.classList.toggle('px-[18px]')
     }
     else {
       $aside?.classList.toggle('left-0');
@@ -148,9 +79,9 @@ const { title } = Astro.props;
   
   if($aside?.classList.contains('w-[60px]')) {
     $main?.classList.toggle('lg:pl-[90px]');
-    explorer?.classList.toggle('pr-[123px]');
-    library?.classList.toggle('pr-[123px]');
-    principal?.classList.remove('pr-[123px]');
+    explorer?.classList.toggle('px-[80px]');
+    library?.classList.toggle('px-[80px]');
+    principal?.classList.toggle('px-[80px]');
   } 
 });
 </script>

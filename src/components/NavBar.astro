@@ -1,0 +1,27 @@
+---
+import BurguerIcon from "@/components/icons/BurguerIcon.astro";
+import LogoYTM from "@/components/icons/LogoYTM.astro";
+import GitHubIcon from "@/components/icons/GitHubIcon.astro";
+---
+
+<header class="flex flex-row justify-between lg:items-center p-4 gap-4 w-full fixed z-50">
+    <div class="flex items-center gap-4">
+      <button class="hidden md:block rounded-full p-2 active:bg-gray-700 md:hover:bg-gray-700 transition-all">
+        <BurguerIcon>
+      </button>
+      <a href="/" aria-label="Inicio">
+        <LogoYTM />
+      </a>
+    </div>
+    <div class="flex md:m-auto">
+
+      <!-- TODO: barra de busqueda -->
+
+    </div>
+    <div class="pr-4 flex">
+      <a href="https://github.com/TeGsOg1/YouTubeMusicClon"
+      target="_blank"
+      class="text-white bg-gray-800 p-2 rounded-full active:bg-gray-700 md:hover:bg-gray-700 transition-all"
+      aria-label="github"><GitHubIcon/></a>
+    </div>
+</header>
