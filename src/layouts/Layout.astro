@@ -63,6 +63,9 @@ const { title } = Astro.props;
     principalText?.classList.toggle('hidden');
     $main?.classList.toggle('md:pl-[90px]');
       if($aside?.classList.contains('w-[60px]')) {
+        explorer?.classList.remove('px-[80px]');
+        library?.classList.remove('px-[80px]');
+        principal?.classList.remove('px-[80px]');
         explorer?.classList.add('px-[18px]');
         library?.classList.add('px-[18px]');
         principal?.classList.add('px-[18px]')
@@ -71,6 +74,9 @@ const { title } = Astro.props;
         explorer?.classList.remove('px-[18px]');
         library?.classList.remove('px-[18px]');
         principal?.classList.remove('px-[18px]')
+        explorer?.classList.add('px-[80px]');
+        library?.classList.add('px-[80px]');
+        principal?.classList.add('px-[80px]');
       }
     }
     else {
