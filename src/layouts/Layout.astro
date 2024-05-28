@@ -62,9 +62,16 @@ const { title } = Astro.props;
     libraryText?.classList.toggle('hidden');
     principalText?.classList.toggle('hidden');
     $main?.classList.toggle('md:pl-[90px]');
-    explorer?.classList.toggle('px-[18px]');
-    library?.classList.toggle('px-[18px]');
-    principal?.classList.toggle('px-[18px]')
+      if($aside?.classList.contains('w-[60px]')) {
+        explorer?.classList.add('px-[18px]');
+        library?.classList.add('px-[18px]');
+        principal?.classList.add('px-[18px]')
+      }
+      else {
+        explorer?.classList.remove('px-[18px]');
+        library?.classList.remove('px-[18px]');
+        principal?.classList.remove('px-[18px]')
+      }
     }
     else {
       $aside?.classList.toggle('left-0');
