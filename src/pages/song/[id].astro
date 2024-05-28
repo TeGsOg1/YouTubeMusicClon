@@ -17,7 +17,9 @@ const { id } = Astro.params;
 const song = songs.find((song) => song.id.toString() === id);
 ---
 
-<Layout title=`YTM Clon ${song?.title}`>
+<Layout 
+description=`${song?.title} lyrics and cover`
+title=`YTM Clon ${song?.title}`>
   <BackPage />
   <div
     class="grid grid-flow-row mr-20 lg:mr-0 lg:grid-cols-2 gap-10 w-full  "
