@@ -1,44 +1,52 @@
 ---
-import MainIcon from "./icons/MainIcon.astro"
-import ExplorerIcon from "./icons/ExplorerIcon.astro"
-import LibraryIcon from "./icons/LibraryIcon.astro"
+import MainIcon from "./icons/MainIcon.astro";
+import ExplorerIcon from "./icons/ExplorerIcon.astro";
+import LibraryIcon from "./icons/LibraryIcon.astro";
 ---
 
 <aside
-          transition:persist
-          class="flex flex-row fixed bg-gray-600 w-60 mt-20 ml-2 z-10 transition-all rounded-lg"
-          id="aside"
-        >
-          <ul>
-            <li class="w-full" >
-              <a 
-                id="princ"
-                href="/"
-                class=" flex text-start justify-start rounded-lg py-4 px-[70px] gap-2 text-white hover:bg-gray-700 transition-all"
-              >
-              <MainIcon />
-                <span id="princ-txt">Inicio</span>
-              </a>
-            </li>
-            <li class="w-full" >
-              <a
-                id="expl"
-                href="#"
-                class=" flex text-start justify-start rounded-lg py-4 px-[70px] gap-2 text-white hover:bg-gray-700 transition-all"
-              >
-              <ExplorerIcon />
-                <span id="expl-txt">Explorar</span>
-              </a>
-            </li>
-            <li class="w-full" >
-              <a
-                id="lib"
-                href="#"
-                class=" flex text-start justify-start rounded-lg py-4 px-[70px] gap-2 text-white hover:bg-gray-700 transition-all"
-              >
-              <LibraryIcon />
-                <span id="lib-txt">Biblioteca</span>
-              </a>
-            </li>
-          </ul>
-        </aside>
+  transition:persist
+  class="flex flex-row fixed bg-gray-600 w-60 mt-20 ml-2 z-10 transition-all rounded-lg"
+  id="aside"
+>
+  <ul>
+    <li class="w-full">
+      <a
+        id="princ"
+        href="/"
+        class="flex text-start justify-start rounded-lg py-4 px-[70px] gap-2 text-white hover:bg-gray-700 transition-all"
+      >
+        <MainIcon />
+        <span id="princ-txt">Inicio</span>
+      </a>
+    </li>
+    <li class="w-full">
+      <a
+        id="expl"
+        href="#"
+        class="flex text-start justify-start rounded-lg py-4 px-[70px] gap-2 text-white hover:bg-gray-700 transition-all"
+      >
+        <ExplorerIcon />
+        <span id="expl-txt">Explorar</span>
+      </a>
+    </li>
+    <li class="w-full">
+      <a
+        id="lib"
+        href="#"
+        class="flex text-start justify-start rounded-lg py-4 px-[70px] gap-2 text-white hover:bg-gray-700 transition-all"
+      >
+        <LibraryIcon />
+        <span id="lib-txt">Biblioteca</span>
+      </a>
+    </li>
+  </ul>
+</aside>
+
+<style>
+    @media (width < 768px)  {
+    aside {
+      left: -100%;
+    }
+  }
+</style>

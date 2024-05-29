@@ -25,3 +25,12 @@ import GitHubIcon from "@/components/icons/GitHubIcon.astro";
       aria-label="github"><GitHubIcon/></a>
     </div>
 </header>
+
+<style>
+    header {
+    scrollbar-gutter: stable;
+    animation: scrollBlur linear both;
+    animation-timeline: scroll();
+    animation-range: 0 50px;
+  }
+</style>

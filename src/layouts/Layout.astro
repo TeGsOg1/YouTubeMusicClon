@@ -101,19 +101,9 @@ const { title, description } = Astro.props;
     margin: 0;
   }
 
-  body {
-    background: #232323;
-  }
 
 
-  header {
-    scrollbar-gutter: stable;
-    animation: scrollBlur linear both;
-    animation-timeline: scroll();
-    animation-range: 0 50px;
-  }
-
-  /* Keyframes
+  /* Keyframe to NavBar Animation
   ------------------------------------------------------ */
 
   @keyframes scrollBlur {
@@ -123,14 +113,13 @@ const { title, description } = Astro.props;
     }
   }
 
-  @media (width < 782px)  {
+  /* Media Querys
+  ------------------------------------------------------ */
+  @media (width < 768px)  {
     main {
       padding-left: 0 ;
       justify-content: center;
     }
 
-    aside {
-      left: -100%;
-    }
   }
 </style>
