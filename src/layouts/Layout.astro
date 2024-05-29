@@ -57,12 +57,12 @@ const { title, description } = Astro.props;
     const $aside = document.querySelector('aside');
 
   $button?.addEventListener('click', () => {
-    if(screen.width > 782) {
+    if(screen.width > 768) {
     $aside?.classList.toggle('w-[60px]');
     explorerText?.classList.toggle('hidden');
     libraryText?.classList.toggle('hidden');
     principalText?.classList.toggle('hidden');
-    $main?.classList.toggle('lg:pl-[90px]');
+    $main?.classList.toggle('md:pl-[90px]');
       if($aside?.classList.contains('w-[60px]')) {
         explorer?.classList.remove('px-[70px]');
         library?.classList.remove('px-[70px]');
