@@ -7,6 +7,7 @@ export function CardPlayButton({ id }) {
     isPlaying,
     setIsPlaying,
     setCurrentMusic,
+    setIsPlayerOpen,
   } = usePlayerStore();
 
   const isPlayingSong = isPlaying && currentMusic?.song?.id === id;
@@ -22,12 +23,12 @@ export function CardPlayButton({ id }) {
                 setIsPlaying(true)
                 setCurrentMusic({ songs, playlist, song: songs[id-1] })
     });
-
+    setIsPlayerOpen(true);
     }
 
     return(
-        <a href={`/song/${id}`} onClick={handleClick} className=' bg-slate-400'>
+    <button onClick={handleClick} className=' w-full bg-slate-400'>
       {isPlaying ? <Pause /> : <Play />}
-    </a>
+    </button>
   );
 }

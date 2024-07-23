@@ -1,6 +1,7 @@
 import { usePlayerStore } from "@/store/PlayerStore";
 import { useEffect, useRef, useState } from "react";
 import { Slider } from "./Slider";
+import '@/components/style/player.css'
 
 export const Pause = () => (
   <svg
@@ -76,15 +77,46 @@ export const Volume = () => (
     />
   </svg>
 );
+
+export const ArrowUp = () => (
+  <svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="52"
+  height="52"
+  viewBox="0 0 24 24"><path fill="#ffffff" d="m7 14l5-5l5 5z"></path>
+  </svg>
+);
 const CurrentSong = ({ image, title, artists }) => {
+  const { isPlayerOpen } = usePlayerStore();
+  const isMobile = window.innerWidth < 768;
+  const songInfo = isMobile && isPlayerOpen
+  ? 'songInfoOpen'
+  : 'songInfo'
+  const songInfoImg = isMobile && isPlayerOpen
+  ? 'songInfoImgOpen'
+  : 'songInfoImg'
+  const songInfoTitle = isMobile && isPlayerOpen
+  ? 'songInfoTitleOpen'
+  : 'songInfoTitle'
+  const songInfoArtist = isMobile && isPlayerOpen
+  ? 'songInfoArtistOpen'
+  : 'songInfoArtist'
+  const songInfoText = isMobile && isPlayerOpen
+  ? 'songInfoTextOpen'
+  : 'songInfoText'
+  const songInfoImgContainer = isMobile && isPlayerOpen
+  ? 'songInfoImgContainerOpen'
+  : 'songInfoImgContainer'
+
   return (
-    <section className="flex flex-row items-center gap-4 pt-2 w-[200px]">
-      <div className="min-w-16 min-h-16 bg-slate-500 ">
-        <img src={image} className="h-16 w-16" alt={title} />
+    <section className={songInfo}>
+      <div className={songInfoImgContainer}>
+        <img src={image} className={songInfoImg} alt={title} />
+        {isPlayerOpen && <img id='img' src={image} className="animate-fade-in animate-delay-150 blur-[27px] w-full h-auto px-7 rounded-xl object-cover right-0 left-0 top-0 my-0 mx-auto absolute"></img>}
       </div>
-      <div className="flex flex-col">
-        <span className="truncate">{title}</span>
-        <span className="opacity-80">{artists}</span>
+      <div className={songInfoText}>
+        <span className={songInfoTitle}>{title}</span>
+        <span className={songInfoArtist}>{artists}</span>
       </div>
     </section>
   );
@@ -151,7 +183,7 @@ export const AudioControls = ({audio}) => {
   const duration = audio?.current?.duration ?? 0;
 
   return(
-    <div className="flex flex-row gap-4">
+    <div className="flex flex-row gap-4 px-5">
       
       <span className=" opacity-70">{formatTime(currentTime)}</span>
       
@@ -159,27 +191,21 @@ export const AudioControls = ({audio}) => {
         value={[currentTime]}
         min={0}
         max={audio?.current?.duration ?? 0}
-        className="w-[100px] md:w-[400px]"
+        className="min-w-[300px] max-w-[400px] w-auto z-"
         onValueChange={(value) => {
           const [newTimeUpdate] = value;
           audio.current.currentTime = newTimeUpdate;
         }}
       />
 
-      <span className="opacity-70">{formatTime(duration)}</span>
+      <span className="opacity-70">{duration ? formatTime(duration): null}</span>
     </div>
   )
 }
 
 export function Player() {
-  const { currentMusic, isPlaying, setIsPlaying, volume, setAudioRef } = usePlayerStore();
+  const { currentMusic, isPlaying, setIsPlaying, volume, isPlayerOpen, setIsPlayerOpen } = usePlayerStore();
     const audioRef = useRef(null);
-
-    useEffect(() => {
-        setAudioRef(audioRef);
-    }, [setAudioRef]);
-
-
 
   useEffect(() => {
     isPlaying ? audioRef.current.play() : audioRef.current.pause();
@@ -203,26 +229,50 @@ export function Player() {
   const handleClick = () => {
     setIsPlaying(!isPlaying);
   };
-  
-  if(!currentMusic.song) return
+  const handleClickOpen = () => {
+    setIsPlayerOpen(!isPlayerOpen);
+  };
+  const isMobile = window.innerWidth < 768;
+  const playerOpen = isMobile && isPlayerOpen 
+    ? 'playerOpen'
+    : 'player'
+  const playerControls = isMobile && isPlayerOpen
+    ? 'audioControlsOpen'
+    : 'audioControls'
+  const Arrow = isMobile && isPlayerOpen
+    ? 'arrowDown'
+    : 'arrowUp'
+  const playerControlsPause = isMobile && isPlayerOpen
+    ? 'audioControlsPauseMobile'
+    : 'audioControlsPause'
+  const playerControlsPauseButton = isMobile && isPlayerOpen
+    ? 'audioControlsPauseButtonMobile'
+    : 'audioControlsPauseButton'
   return (
-    <div className="flex flex-row w-full h-20 px-4 gap-4 justify-between z-50 text-white">
-      <div className="hidden md:block ">
+    <div className={playerOpen} >
+      <div>
         <CurrentSong {...currentMusic.song} />
+
       </div>
-      <div className="grid place-content-center ">
-        <div className="flex flex-col justify-center items-center">
-          <button className="w-10 " onClick={handleClick}>
-            {isPlaying ? <Pause /> : <Play />}
-          </button>
+      <div className={playerControls}>
+        <div className={playerControlsPause}>
+            { currentMusic.song && <button className={playerControlsPauseButton} onClick={handleClick}>{isPlaying ? <Pause /> : <Play />}</button>}
           <audio ref={audioRef} />
           <AudioControls audio={audioRef} />
         </div>
       </div>
-
-      <div className="flex ">
+      <div className="hidden md:flex mr-8">
         <VolumeControls />
+      <button className="block w-2 justify-center items-center " onClick={handleClickOpen}>
+        <ArrowUp />
+      </button>
       </div>
+      {!isPlayerOpen && <div className="pr-20 pt-2 md:hidden"> <button onClick={handleClick}>{ isPlaying ? <Pause /> : <Play /> }</button></div>}
+
+      <button className={Arrow} onClick={handleClickOpen}>
+        <ArrowUp />
+      </button>
     </div>
-  );
+    
+  )
 }
