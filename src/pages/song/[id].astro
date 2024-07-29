@@ -4,7 +4,6 @@ import Layout from "@/layouts/Layout.astro";
 import { songs } from "@/lib/data";
 import BackPage from "@/components/BackPage.astro"
 import Image from "astro/components/Image.astro";
-import { PlayerMobile } from "@/components/PlayerControls";
 
 
 export const getStaticPaths: GetStaticPaths = () => {
@@ -46,7 +45,6 @@ title=`YTM Clon ${song?.title}`>
         {song?.artists}
       </p>
       <div class="block md:hidden">
-        <PlayerMobile client:load transition:name="media-player-mobile" transition:persist/>
       </div>
     </div>
   <div class="order-1 lg:order-2 w-full  h-auto max-h-[1400px]">
@@ -58,7 +56,7 @@ title=`YTM Clon ${song?.title}`>
   </h1>
       <div id="lyrics" class="hidden lg:block h-auto max-h-[600px] overflow-y-auto p-5 rounded-2xl bg-gradient-to-b from-slate-800 to-transparent">
         <p class="text-white text-2xl whitespace-pre-line ">
-          {song?.lyrics}
+          {song?.lyric}
         </p>
       </div>
     </div>
