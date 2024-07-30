@@ -28,7 +28,7 @@ export function CardPlayButton({ id }) {
 
     return(
     <button onClick={handleClick} className=' w-full bg-slate-400'>
-      {isPlaying ? <Pause /> : <Play />}
+      {isPlaying && currentMusic.song.id == id ? <Pause /> : <Play />}
     </button>
   );
 }

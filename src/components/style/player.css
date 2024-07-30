@@ -9,7 +9,7 @@
     gap: 1rem; /* 4 * 0.25rem */
     justify-content: space-between;
     align-items: center;
-    z-index: 80;
+    z-index: 100;
     color: white;
     background-color: #1f2937;
     transition: all 1s;
@@ -30,8 +30,7 @@
     flex-direction: row;
     gap: 1rem;
     align-items: center;
-    padding-top: 0.5rem;
-    width: 100%;
+    width: 100%; 
     transition: all 1s;
 }
 
@@ -71,6 +70,32 @@
     z-index: 200;
 }
 
+.playerDesk {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    width: calc(100% );
+    height: calc(100% - 80px);
+    background-color: #000000;
+    padding-right: 18rem;
+    gap: 3rem;
+    bottom: -200%;
+    z-index: 10;
+    border-radius: 10px;
+    align-items: center;
+    justify-items: center;
+    transition: all .5s;
+}
+
+.playerDesk.Open {
+    bottom: 0;
+    transition: all .5s;
+}
+
+.lyric {
+    scrollbar-color: white transparent;
+}
+
 .audioControlsPause {
     display: flex;
     flex-direction: column;
@@ -82,15 +107,25 @@
     width: 32px;
 }
 
-.arrowUp {
+.arrowUpMobile {
     display: none;
 }
 
-.arrowDown {
+.arrowDownMobile {
     display: none;
+}
+
+@media (width < 1024px) {
+    .playerDesk {
+        flex-direction: column;
+    }
 }
 
 @media (width<768px) {
+    .playerDesk {
+        display: none;
+    }
+
     .audioControls {
         display: none;
     }
@@ -113,6 +148,7 @@
     .audioControlsPauseButtonMobile {
         background-color: white;
         padding: 1.5rem;
+        min-width: 1.5rem;
         border-radius: 50%;
     }
     .audioControlsPauseButtonMobile {
@@ -136,7 +172,7 @@
         transition: all 1s;
     }
 
-    .arrowDown {
+    .arrowDownMobile {
         display: block;
         position: absolute;
         left: 0;
@@ -150,7 +186,7 @@
         transition: all 1s;
     }
 
-    .arrowUp {
+    .arrowUpMobile {
         display: block;
         position: absolute;
         right: 0;
@@ -202,6 +238,9 @@
         display: inline-block;
         font-size: 1.8rem;
         transition: all 1s;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .songInfoArtistOpen{
@@ -209,5 +248,8 @@
         font-size: 1.4rem;
         opacity: 0.7;
         transition: all 1s;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 }

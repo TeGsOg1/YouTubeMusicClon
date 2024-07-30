@@ -240,14 +240,15 @@ export function Player() {
     ? 'audioControlsOpen'
     : 'audioControls'
   const Arrow = isMobile && isPlayerOpen
-    ? 'arrowDown'
-    : 'arrowUp'
+    ? 'arrowDownMobile'
+    : 'arrowUpMobile'
   const playerControlsPause = isMobile && isPlayerOpen
     ? 'audioControlsPauseMobile'
     : 'audioControlsPause'
   const playerControlsPauseButton = isMobile && isPlayerOpen
     ? 'audioControlsPauseButtonMobile'
     : 'audioControlsPauseButton'
+
   return (
     <div className={playerOpen} >
       <div>

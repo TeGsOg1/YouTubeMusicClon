@@ -97,7 +97,7 @@ export interface Song {
   image: string;
   artists: string[];
   duration: string;
-  lyrics: string;
+  lyric: string;
 }
 
 export const songs: Song[] = [
@@ -107,7 +107,7 @@ export const songs: Song[] = [
     "image": "https://i.scdn.co/image/ab67616d0000b2730ae4f4d42e4a09f3a29f64ad",
     "artists": ["Avicii"],
     "duration": "2:56",
-    "lyrics": `(Hey) Once upon a younger year
+    "lyric": `(Hey) Once upon a younger year
     When all our shadows disappeared
     The animals inside came out to play
     (Hey) Went face to face with all our fears
@@ -181,7 +181,7 @@ export const songs: Song[] = [
     "image": "https://i.scdn.co/image/ab67616d0000b27337c0b3670236c067c8e8bbcb",
     "artists": ["FIFTY-FIFTY"],
     "duration": "3:34",
-    "lyrics": `(La-la-la, la-la-la)
+    "lyric": `(La-la-la, la-la-la)
     (La-la-la-la, la-la-la-la)
     
     A hopeless romantic all my life
@@ -242,7 +242,7 @@ export const songs: Song[] = [
     "image": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/6c/e6/c7/6ce6c71b-9c90-9040-622e-524f1a878135/15UMGIM37781.rgb.jpg/1200x1200bf-60.jpg",
     "artists": ["Mon Laferte"],
     "duration": "4:05",
-    "lyrics": `Hoy volví a dormir en nuestra cama
+    "lyric": `Hoy volví a dormir en nuestra cama
     Y todo sigue igual
     El aire y nuestros gatos
     Nada cambiará
@@ -287,7 +287,7 @@ export const songs: Song[] = [
     "image": "https://i.scdn.co/image/ab67616d0000b273eabddae72a3b1a5ed51d1ac6",
     "artists": ["Stephen Sanchez"],
     "duration": "3:15",
-    "lyrics": `Georgia
+    "lyric": `Georgia
     Wrap me up in all your
     I want ya in my arms
     Oh, let me hold ya
@@ -323,7 +323,7 @@ export const songs: Song[] = [
     "image": "https://www.losautenticosdecadentes.com.ar/img/albumes/sigue-tu-camino.jpg",
     "artists": ["Los Auténticos Decadentes"],
     "duration": "4:47",
-    "lyrics": `Dentro de tus ojos veo un lago donde un hada
+    "lyric": `Dentro de tus ojos veo un lago donde un hada
     Se desnuda para que la adore el Sol
     La melancolía de la tarde me ha ganado el corazón
     Y se nubla de dudas
@@ -401,7 +401,7 @@ export const songs: Song[] = [
     "image": "https://i.scdn.co/image/ab67616d0000b273c75d7b12b6b6eacea1e21068",
     "artists": ["Shanguy"],
     "duration": "2:39",
-    "lyrics": `Viens j't'emmène sur ma planète
+    "lyric": `Viens j't'emmène sur ma planète
     Ici c'est pas comme à l'école
     Tu verras, c'est super chouette
     Entre adultes, on fait la fête
@@ -460,7 +460,7 @@ export const songs: Song[] = [
     "image": "https://i.scdn.co/image/ab67616d0000b27321be16e998effa9f1f4b63a9",
     "artists": ["Marc Anthony"],
     "duration": "4:11",
-    "lyrics": `(Voy a reír, voy a bailar)
+    "lyric": `(Voy a reír, voy a bailar)
     (Vivir mi vida, la la la la)
     (Voy a reír, voy a gozar)
     Vivir mi vida, la la la la
@@ -528,7 +528,7 @@ export const songs: Song[] = [
     "image": "https://i.scdn.co/image/ab67616d0000b273c091c40987e92a9256d2f210",
     "artists": ["Juanes"],
     "duration": "3:36",
-    "lyrics": `(No por pobre y feo hombre, ¿pero antojao'?)
+    "lyric": `(No por pobre y feo hombre, ¿pero antojao'?)
     (Ay, no)
     
     Tengo la camisa negra
@@ -611,7 +611,7 @@ export const songs: Song[] = [
     "image": "https://i.scdn.co/image/ab67616d0000b273c725c87a1394f9558e7fa9c8",
     "artists": ["Enrique Iglesias"],
     "duration": "4:03",
-    "lyrics": `Enrique Iglesias
+    "lyric": `Enrique Iglesias
     One love, one love
     Gente de Zona
     Descemer
@@ -703,7 +703,7 @@ export const songs: Song[] = [
     "image": "https://lh3.googleusercontent.com/WZx94Asj29Zm7VkrxrEsk4dQzg0mPbGChm-1jhX8LQIgAkJ1mcRdq2o9CwAjZIUJm6O9pViJxxhuUto=w544-h544-l90-rj",
     "artists": ["Don Omar"],
     "duration": "3:18",
-    "lyrics": `A&X
+    "lyric": `A&X
     El Orfanato
     Danza Kuduro
     (Plop, plop, plop, plop, plop, plop, plop)
@@ -825,7 +825,7 @@ export const songs: Song[] = [
     "image": "https://i.scdn.co/image/ab67616d0000b273a043fa84be801dca33dacca1",
     "artists": ["Julieta Venegas"],
     "duration": "3:25",
-    "lyrics": `Tengo que confesar que a veces
+    "lyric": `Tengo que confesar que a veces
     No me gusta tu forma de ser
     Luego te me desapareces
     Y no entiendo muy bien por qué
@@ -880,7 +880,7 @@ export const songs: Song[] = [
     "image": "https://images.genius.com/5e94e386f9f2c1199cf15eb98286ec73.960x960x1.png",
     "artists": ["Los Fabulosos Cadillacs"],
     "duration": "4:34",
-    "lyrics": `Te están buscando matador
+    "lyric": `Te están buscando matador
 
     Me dicen el matador, nací en barracas
     Si hablamos de matar mis palabras matan
