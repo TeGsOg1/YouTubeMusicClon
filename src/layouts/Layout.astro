@@ -5,7 +5,6 @@ import NavBar from '@/components/NavBar.astro';
 import Aside from '@/components/Aside.astro';
 import Footer from '@/components/Footer.astro';
 import Backgound from '@/components/Backgound.astro';
-import LogoYTM from '@/components/icons/LogoYTM.astro';
 
 interface Props {
   title: string;
@@ -24,7 +23,7 @@ const { title, description } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <link rel="icon" href='/public/Image/YTM.png' sizes="32x32" type="image/png">
+    <link rel="icon" href='@/components/icons/YTM.svg' sizes="32x32" type="image/png">
     <ViewTransitions />
   </head>
   <body class="overflow-x-hidden h-dvh">

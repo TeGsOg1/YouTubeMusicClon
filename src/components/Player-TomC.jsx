@@ -111,8 +111,14 @@ const CurrentSong = ({ image, title, artists }) => {
   return (
     <section className={songInfo}>
       <div className={songInfoImgContainer}>
-        <img src={image} className={songInfoImg} alt={title} />
-        {isPlayerOpen && <img id='img' src={image} className="animate-fade-in animate-delay-150 blur-[27px] w-full h-auto px-7 rounded-xl object-cover right-0 left-0 top-0 my-0 mx-auto absolute"></img>}
+        <img src={image} className={songInfoImg} alt={`${title} image`} />
+        {isPlayerOpen &&
+         <img id='img' 
+            src={image}
+            alt={`${title} image`} 
+            className="animate-fade-in animate-delay-150 blur-[27px] w-full h-auto px-7 rounded-xl object-cover right-0 left-0 top-0 my-0 mx-auto absolute">
+            </img>
+        }
       </div>
       <div className={songInfoText}>
         <span className={songInfoTitle}>{title}</span>
@@ -233,18 +239,15 @@ export function Player() {
     setIsPlayerOpen(!isPlayerOpen);
   };
   const isMobile = window.innerWidth < 768;
-  const player = isMobile && isPlayerOpen 
+  const playerOpen = isMobile && isPlayerOpen 
     ? 'playerOpen'
     : 'player'
   const playerControls = isMobile && isPlayerOpen
     ? 'audioControlsOpen'
     : 'audioControls'
-  const ArrowMobile = isMobile && isPlayerOpen
+  const Arrow = isMobile && isPlayerOpen
     ? 'arrowDownMobile'
     : 'arrowUpMobile'
-  const Arrow = !isMobile && isPlayerOpen 
-    ? 'arrow Down'
-    : 'arrow Up'
   const playerControlsPause = isMobile && isPlayerOpen
     ? 'audioControlsPauseMobile'
     : 'audioControlsPause'
@@ -253,9 +256,10 @@ export function Player() {
     : 'audioControlsPauseButton'
 
   return (
-    <div className={player} >
+    <div className={playerOpen} >
       <div>
         <CurrentSong {...currentMusic.song} />
+
       </div>
       <div className={playerControls}>
         <div className={playerControlsPause}>
@@ -266,13 +270,13 @@ export function Player() {
       </div>
       <div className="hidden md:flex mr-8">
         <VolumeControls />
-      <button className={Arrow} onClick={handleClickOpen}>
+      <button className="block w-2 justify-center items-center " onClick={handleClickOpen}>
         <ArrowUp />
       </button>
       </div>
-      {!isPlayerOpen && <div className="w-24 pt-2 md:hidden"> <button onClick={handleClick}>{ isPlaying ? <Pause /> : <Play /> }</button></div>}
+      {!isPlayerOpen && <div className="mr-20 pt-2 md:hidden"> <button onClick={handleClick}>{ isPlaying ? <Pause /> : <Play /> }</button></div>}
 
-      <button className={ArrowMobile} onClick={handleClickOpen}>
+      <button className={Arrow} onClick={handleClickOpen}>
         <ArrowUp />
       </button>
     </div>
