@@ -6,9 +6,9 @@ export const SongImage = ({image, title}) => {
             <img 
                 src={image} 
                 alt={`${title} blurred image`}
-                className="animate-fade-in animate-delay-150 blur-[27px] min-w-[50px] h-auto lg:w-[700px] md:w-[600px] object-cover right-0 left-0 my-0 p-10 mx-auto -z-10 absolute"></img>
+                className="animate-fade-in animate-delay-150 blur-[27px] min-w-[50px] h-auto lg:w-[730px] md:w-[590px] object-cover right-0 left-0 my-0 p-10 mx-auto -z-10 absolute"></img>
             <img 
-                className="w-full h-full lg:max-w-[700px] md:max-w-[600px] rounded-xl object-cover mx-auto " 
+                className="w-full h-full lg:max-w-[650px] md:max-w-[500px] rounded-xl object-cover mx-auto " 
                 src={image} 
                 alt={`${title} image`} 
             />
