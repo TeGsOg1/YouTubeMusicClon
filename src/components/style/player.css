@@ -29,7 +29,7 @@
     display: flex;
     flex-direction: row;
     gap: 1rem;
-    justify-content: start;
+    justify-content:flex-start;
     align-items: center;
     width: 100%; 
     transition: all 1s;
@@ -67,7 +67,7 @@
 
 }
 
-.audioControls {
+.audioControlsContainer {
     display: grid;
     place-content: center;
     z-index: 200;
@@ -100,10 +100,10 @@
     scrollbar-color: white transparent;
 }
 
-.audioControlsPause {
+.audioControlsButtons {
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    gap: 1.5rem;
     align-items: center;
 }
 
@@ -144,18 +144,18 @@
         display: none;
     }
 
-    .audioControls {
+    .audioControlsContainer {
         display: none;
     }
 
-    .audioControlsOpen {
+    .audioControlsContainerOpen {
         display: grid;
         place-content: center;
         z-index: 200;
         transition: all 1s;
     }
 
-    .audioControlsPauseMobile {
+    .audioControlsButtonsMobile {
         display: flex;
         flex-direction: column-reverse;
         justify-content: center;
@@ -221,7 +221,7 @@
 
     .songInfo {
         min-width: none;
-        width: 100%;
+        width: auto;
         max-width: 230px;
         overflow: hidden;
     }

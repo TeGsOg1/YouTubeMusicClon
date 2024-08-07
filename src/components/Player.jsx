@@ -1,7 +1,9 @@
 import { usePlayerStore } from "@/store/PlayerStore";
 import { useEffect, useRef, useState } from "react";
 import { Slider } from "./Slider";
-import '@/components/style/player.css'
+import '@/components/style/player.css';
+import { playlists } from "@/lib/data";
+
 
 export const Pause = () => (
   <svg
@@ -49,7 +51,51 @@ export const Play = () => (
     </g>
   </svg>
 );
-
+export const Back = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="#fff"
+    width={24}
+    height={24}
+    preserveAspectRatio="xMidYMid meet"
+    className="style-scope tp-yt-iron-icon"
+    style={{
+      pointerEvents: "none",
+      display: "block",
+      width: "100%",
+      height: "100%",
+    }}
+  >
+    <g className="style-scope tp-yt-iron-icon">
+      <path
+        d="M19,6L9,12l10,6V6L19,6z M7,6H5v12h2V6z"
+        className="style-scope tp-yt-iron-icon"
+      ></path>
+    </g>
+  </svg>
+);
+export const Next = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="#fff"
+    width={24}
+    height={24}
+    className="style-scope tp-yt-iron-icon"
+    style={{
+      pointerEvents: "none",
+      display: "block",
+      width: "100%",
+      height: "100%",
+    }}
+  >
+    <g className="style-scope tp-yt-iron-icon">
+      <path
+        d="M5,18l10-6L5,6V18L5,18z M19,6h-2v12h2V6z"
+        className="style-scope tp-yt-iron-icon"
+      ></path>
+    </g>
+  </svg>
+);
 export const VolumeMute = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -63,7 +109,6 @@ export const VolumeMute = () => (
     />
   </svg>
 );
-
 export const Volume = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -77,42 +122,46 @@ export const Volume = () => (
     />
   </svg>
 );
-
 export const ArrowUp = () => (
   <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="52"
-  height="52"
-  viewBox="0 0 24 24"><path fill="#ffffff" d="m7 14l5-5l5 5z"></path>
+    xmlns="http://www.w3.org/2000/svg"
+    width="52"
+    height="52"
+    viewBox="0 0 24 24"
+  >
+    <path fill="#ffffff" d="m7 14l5-5l5 5z"></path>
   </svg>
 );
+
+
 const CurrentSong = ({ image, title, artists }) => {
   const { isPlayerOpen } = usePlayerStore();
   const isMobile = window.innerWidth < 768;
-  const songInfo = isMobile && isPlayerOpen
-  ? 'songInfoOpen'
-  : 'songInfo'
-  const songInfoImg = isMobile && isPlayerOpen
-  ? 'songInfoImgOpen'
-  : 'songInfoImg'
-  const songInfoTitle = isMobile && isPlayerOpen
-  ? 'songInfoTitleOpen'
-  : 'songInfoTitle'
-  const songInfoArtist = isMobile && isPlayerOpen
-  ? 'songInfoArtistOpen'
-  : 'songInfoArtist'
-  const songInfoText = isMobile && isPlayerOpen
-  ? 'songInfoTextOpen'
-  : 'songInfoText'
-  const songInfoImgContainer = isMobile && isPlayerOpen
-  ? 'songInfoImgContainerOpen'
-  : 'songInfoImgContainer'
+  const songInfo = isMobile && isPlayerOpen ? "songInfoOpen" : "songInfo";
+  const songInfoImg =
+    isMobile && isPlayerOpen ? "songInfoImgOpen" : "songInfoImg";
+  const songInfoTitle =
+    isMobile && isPlayerOpen ? "songInfoTitleOpen" : "songInfoTitle";
+  const songInfoArtist =
+    isMobile && isPlayerOpen ? "songInfoArtistOpen" : "songInfoArtist";
+  const songInfoText =
+    isMobile && isPlayerOpen ? "songInfoTextOpen" : "songInfoText";
+  const songInfoImgContainer =
+    isMobile && isPlayerOpen
+      ? "songInfoImgContainerOpen"
+      : "songInfoImgContainer";
 
   return (
     <section className={songInfo}>
       <div className={songInfoImgContainer}>
         <img src={image} className={songInfoImg} alt={title} />
-        {isPlayerOpen && <img id='img' src={image} className="animate-fade-in animate-delay-150 blur-[27px] w-full h-auto px-7 rounded-xl object-cover right-0 left-0 top-0 my-0 mx-auto absolute"></img>}
+        {isPlayerOpen && (
+          <img
+            id="img"
+            src={image}
+            className="animate-fade-in animate-delay-150 blur-[27px] w-full h-auto px-7 rounded-xl object-cover right-0 left-0 top-0 my-0 mx-auto absolute"
+          ></img>
+        )}
       </div>
       <div className={songInfoText}>
         <span className={songInfoTitle}>{title}</span>
@@ -136,13 +185,13 @@ const VolumeControls = () => {
       previousVolumeRef.current = volume;
       setVolume(0);
     }
-  }
+  };
 
   return (
     <div className="flex justify-center justify-items-center  text-white gap-3">
-        <button onClick={volumeClick}>
-          {volume === 0 ? <VolumeMute /> : <Volume />}
-        </button>
+      <button onClick={volumeClick}>
+        {volume === 0 ? <VolumeMute /> : <Volume />}
+      </button>
       <Slider
         defaultValue={[100]}
         min={0}
@@ -160,7 +209,7 @@ const VolumeControls = () => {
 };
 
 export const AudioControls = ({audio}) => {
-  const [ currentTime, setCurrentTime ] = useState(0);
+  const { currentTime, setCurrentTime } = usePlayerStore(state=>state);
 
   const handleTimeUpdate = () => {
     setCurrentTime(audio.current.currentTime)
@@ -186,7 +235,7 @@ export const AudioControls = ({audio}) => {
     <div className="flex flex-row gap-4 px-5">
       
       <span className=" opacity-70">{formatTime(currentTime)}</span>
-      
+
       <Slider
         value={[currentTime]}
         min={0}
@@ -203,9 +252,39 @@ export const AudioControls = ({audio}) => {
   )
 }
 
+const BackSong = ({audio}) => {
+  const { setCurrentTime } = usePlayerStore(state=>state);
+
+  const handleClick = () => {
+    setCurrentTime(0);
+    audio.current.currentTime = 0;
+  };
+  return (
+    <button
+      onClick={handleClick}
+    >
+      <Back />
+    </button>
+  );
+}
+
+const NextSong = () => {
+/*   const { setCurrentMusic, currentMusic } = usePlayerStore(state=>state);
+  fetch(`/api/getSongsInfo.json?id=${song.id}`)
+        .then(res => res.json())
+        .then(data => {  
+  const { songs, playlists } = data;
+  setCurrentMusic({ songs, playlists, song: songs[Math.floor(Math.random() * songs.length - 1)] });
+        }); --------TODO------- */ 
+  return(
+    <button >
+      <Next />
+    </button>
+  )
+}
 export function Player() {
   const { currentMusic, isPlaying, setIsPlaying, volume, isPlayerOpen, setIsPlayerOpen } = usePlayerStore();
-    const audioRef = useRef(null);
+  const audioRef = useRef(null);
 
   useEffect(() => {
     isPlaying ? audioRef.current.play() : audioRef.current.pause();
@@ -233,49 +312,58 @@ export function Player() {
     setIsPlayerOpen(!isPlayerOpen);
   };
   const isMobile = window.innerWidth < 768;
-  const player = isMobile && isPlayerOpen 
-    ? 'playerOpen'
-    : 'player'
-  const playerControls = isMobile && isPlayerOpen
-    ? 'audioControlsOpen'
-    : 'audioControls'
-  const ArrowMobile = isMobile && isPlayerOpen
-    ? 'arrowDownMobile'
-    : 'arrowUpMobile'
-  const Arrow = !isMobile && isPlayerOpen 
-    ? 'arrow Down'
-    : 'arrow Up'
-  const playerControlsPause = isMobile && isPlayerOpen
-    ? 'audioControlsPauseMobile'
-    : 'audioControlsPause'
+  const player = isMobile && isPlayerOpen ? "playerOpen" : "player";
+  const playerControlsContainer = isMobile && isPlayerOpen 
+    ? "audioControlsContainerOpen" 
+    : "audioControlsContainer";
+  const playerControlsButtons = isMobile && isPlayerOpen
+    ? "audioControlsButtonsMobile"
+    : "audioControlsButtons";
   const playerControlsPauseButton = isMobile && isPlayerOpen
-    ? 'audioControlsPauseButtonMobile'
-    : 'audioControlsPauseButton'
+    ? "audioControlsPauseButtonMobile"
+    : "audioControlsPauseButton";
+  const ArrowMobile = isMobile && isPlayerOpen 
+    ? "arrowDownMobile" 
+    : "arrowUpMobile";
+  const Arrow = !isMobile && isPlayerOpen 
+    ? "arrow Down" 
+    : "arrow Up";
 
   return (
-    <div className={player} >
+    <div className={player}>
       <div>
         <CurrentSong {...currentMusic.song} />
       </div>
-      <div className={playerControls}>
-        <div className={playerControlsPause}>
-            { currentMusic.song && <button className={playerControlsPauseButton} onClick={handleClick}>{isPlaying ? <Pause /> : <Play />}</button>}
+      <div className={playerControlsContainer}>
+        <div className={playerControlsButtons}>
+          <BackSong audio={audioRef}/>
+          {currentMusic.song && (
+            <button className={playerControlsPauseButton} onClick={handleClick}>
+              {isPlaying ? <Pause /> : <Play />}
+            </button>
+          )}
+          <NextSong audio={audioRef}/>
+        </div>
           <audio ref={audioRef} />
           <AudioControls audio={audioRef} />
-        </div>
       </div>
       <div className="hidden md:flex mr-8">
         <VolumeControls />
-      <button className={Arrow} onClick={handleClickOpen}>
-        <ArrowUp />
-      </button>
+        <button className={Arrow} onClick={handleClickOpen}>
+          <ArrowUp />
+        </button>
       </div>
-      {!isPlayerOpen && <div className="w-24 pt-2 md:hidden"> <button onClick={handleClick}>{ isPlaying ? <Pause /> : <Play /> }</button></div>}
+      {!isPlayerOpen && (
+        <div className="w-24 pt-2 md:hidden">
+          <button onClick={handleClick}>
+            {isPlaying ? <Pause /> : <Play />}
+          </button>
+        </div>
+      )}
 
       <button className={ArrowMobile} onClick={handleClickOpen}>
         <ArrowUp />
       </button>
     </div>
-    
-  )
+  );
 }
