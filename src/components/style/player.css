@@ -149,9 +149,9 @@
     }
 
     .audioControlsContainerOpen {
-        display: grid;
-        grid-direction: column-reverse;
-        place-content: center;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
         z-index: 200;
         transition: all 1s;
     }
