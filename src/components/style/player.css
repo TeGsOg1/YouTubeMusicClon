@@ -150,6 +150,7 @@
 
     .audioControlsContainerOpen {
         display: grid;
+        grid-direction: column-reverse;
         place-content: center;
         z-index: 200;
         transition: all 1s;
@@ -157,7 +158,7 @@
 
     .audioControlsButtonsMobile {
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: row;
         justify-content: center;
         align-items: center;
         gap: 1.5rem;
