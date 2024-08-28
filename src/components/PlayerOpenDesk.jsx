@@ -2,24 +2,26 @@ import { usePlayerStore } from "@/store/PlayerStore";
 
 export const SongImage = ({image, title}) => {
     return(
-        <div className="w-full max-h-full h-auto grid content-center p-10 relative">
+        <div className="w-full h-full flex justify-center items-center p-10 relative">
             <img 
                 src={image} 
                 alt={`${title} blurred image`}
-                className="animate-fade-in animate-delay-150 blur-[27px] min-w-[50px] h-auto lg:w-[730px] md:w-[590px] object-cover right-0 left-0 my-0 p-10 mx-auto -z-10 absolute"></img>
-            <img 
-                className="w-full h-full lg:max-w-[650px] md:max-w-[500px] rounded-xl object-cover mx-auto " 
+                className="animate-fade-in animate-delay-150 blur-[27px] h-full w-full max-w-[800px] max-h-[800px] object-contain right-0 left-0 my-0 p-10 mx-auto -z-10 absolute"></img>
+            <picture className="w-full h-full justify-center items-center flex">
+                <img 
+                className=" object-contain rounded-xl w-full h-full max-w-[700px] max-h-[700px]" 
                 src={image} 
                 alt={`${title} image`} 
-            />
+                />
+            </picture>
         </div>
     )
 }
 
 export const SongLyric = ({lyric}) => {
     return(
-        <div className="h-full w-full grid content-center py-10">
-            <article className="max-w-[700px] min-w-[300px] w-full lg:block max-h-[600px] h-full min-h-[300px] md:mb-20 lg:mb-0 justify-items-start overflow-y-auto p-5 px-10  bg-black">
+        <div className="flex justify-center items-center max-h-[650px] min-h-[200px] h-full w-full">
+            <article className="h-full w-full md:mb-20 lg:mb-0 justify-items-start overflow-y-auto py-5 bg-black">
                 <p className=" text-white text-xl whitespace-pre-line top-0">{lyric}</p>
             </article>
         </div>
