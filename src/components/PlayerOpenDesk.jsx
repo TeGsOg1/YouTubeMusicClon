@@ -21,7 +21,7 @@ export const SongImage = ({image, title}) => {
 export const SongLyric = ({lyric}) => {
     return(
         <div className="flex justify-center items-center max-h-[650px] min-h-[200px] h-full w-full">
-            <article className="h-full w-full md:mb-20 lg:mb-0 justify-items-start overflow-y-auto py-5 bg-black">
+            <article className="h-full w-full md:mb-20 lg:mb-0 justify-items-start overflow-y-auto p-5 bg-black">
                 <p className=" text-white text-xl whitespace-pre-line top-0">{lyric}</p>
             </article>
         </div>
