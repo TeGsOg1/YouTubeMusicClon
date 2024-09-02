@@ -1,9 +1,8 @@
 import { usePlayerStore } from "@/store/PlayerStore";
-import { Children, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Slider } from "./Slider";
 import { SliderDesk } from "./SliderDesk";
 import '@/components/style/player.css';
-import { playlists } from "@/lib/data";
 
 
 export const Pause = () => (
@@ -131,6 +130,19 @@ export const ArrowUp = () => (
     viewBox="0 0 24 24"
   >
     <path fill="#ffffff" d="m7 14l5-5l5 5z"></path>
+  </svg>
+);
+
+export const Loop = () => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="#ffffff"
+  >
+        <g >
+          <path d="M21,13h1v5L3.93,18.03l2.62,2.62l-0.71,0.71L1.99,17.5l3.85-3.85l0.71,0.71l-2.67,2.67L21,17V13z M3,7l17.12-0.03 l-2.67,2.67l0.71,0.71l3.85-3.85l-3.85-3.85l-0.71,0.71l2.62,2.62L2,6v5h1V7z"></path>
+        </g>
   </svg>
 );
 
@@ -328,7 +340,30 @@ export const PlayerButtons = ({audio, children}) => {
           <span className="opacity-70">{duration ? formatTime(duration): null}</span>
         </div>
     </div>
-  )}
+  )
+}
+
+export const LoopButton = ({audio}) => {
+  const { currentTime, setCurrentTime } = usePlayerStore();
+  const [isLooping, setIsLooping] = useState(false);
+
+  const handleClick = () => {
+    setIsLooping(!isLooping);
+  };
+
+  useEffect(() => {
+    if (isLooping && currentTime === audio.current.duration) {
+      setCurrentTime(0);
+      audio.current.play()
+    }
+  }, [currentTime]);
+
+  return (
+    <button onClick={handleClick} className={isLooping ? "opacity-100" : "opacity-70"}>
+      <Loop />
+    </button>
+  );
+}
 
 export function Player() {
   const { currentMusic, isPlaying, setIsPlaying, volume, isPlayerOpen, setIsPlayerOpen } = usePlayerStore();
@@ -394,7 +429,8 @@ export function Player() {
       <div>
         <CurrentSong {...currentMusic.song} />
       </div>
-      <div className="hidden md:flex mr-8">
+      <div className="hidden md:flex mr-8 gap-3">
+        <LoopButton audio={audioRef} />
         <VolumeControls />
         <button className={Arrow} onClick={handleClickOpen}>
           <ArrowUp />
