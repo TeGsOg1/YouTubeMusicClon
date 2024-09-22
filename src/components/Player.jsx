@@ -445,7 +445,7 @@ export function Player() {
 
       )}
 
-      <button className={ArrowMobile} onClick={handleClickOpen}>
+        <button className={ArrowMobile} onClick={handleClickOpen}>
         <ArrowUp />
       </button>
         <AudioControlsDesk audio={audioRef} />

@@ -1,15 +1,14 @@
 ---
-import type { Playlist } from "@/lib/data"
+import type { Song } from "@/lib/songData"
 import { Image } from 'astro:assets';
 import { CardPlayButton } from "@/components/PlayButtonCard";
 
-
 interface Props {
-  song: Playlist;
+  song: Song;
 }
 
 const { song } = Astro.props
-const { title, artists, image, id } = song
+const { id, title, artists, image } = song
 ---
 
 <article 

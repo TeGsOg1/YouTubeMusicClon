@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Musics from "@/components/Musics.astro";
-import { playlists } from "@/lib/data";
+import { songs } from "@/lib/songData";
 import { PlayerOpenDesk } from "@/components/PlayerOpenDesk";
 
 ---
@@ -13,9 +13,9 @@ title="YouTube Music Clon">
     YouTube Music Clon
   </h1>
   <div class="flex flex-row relative overflow-x-auto gap-2 h-full " id="canciones">
-    {playlists.map((song) => <Musics song={song} />)}
+    {songs.map((song) => <Musics song={song} />)}
   </div>
-   <PlayerOpenDesk client:load  />
+  <PlayerOpenDesk client:load  />
 </Layout>
 
 <style>

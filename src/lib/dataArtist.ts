@@ -66,3 +66,5 @@ export const artist: Artists[] = [
         cover: 'https://source.unsplash.com/random/100x100'
     }
 ];
+
+export const allArtist = [...artist]
