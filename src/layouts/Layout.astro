@@ -1,10 +1,10 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
 
 import NavBar from '@/components/NavBar.astro';
 import Aside from '@/components/Aside.astro';
 import Footer from '@/components/Footer.astro';
-import Backgound from '@/components/Backgound.astro';
+import Background from '@/components/Background.astro';
+import { PlayerOpenDesk } from '@/components/PlayerOpenDesk';
 
 interface Props {
   title: string;
@@ -12,6 +12,7 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+import { ClientRouter } from 'astro:transitions';
 ---
 
 <!doctype html>
@@ -24,16 +25,17 @@ const { title, description } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <link rel="icon" href='@/components/icons/YTM.svg' sizes="32x32" type="image/png">
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body class="overflow-x-hidden h-dvh">
     <div id="app" class="relative h-auto w-full">
       <div class="relative">
-        <Backgound />
+        <Background />
         <NavBar />
         <Aside />
         <main class="flex flex-col relative w-full h-vh gap-4 py-20 p-4 mb-20 md:pl-72 transition-all overflow-hidden">
           <slot />
+          <PlayerOpenDesk client:load/>
         </main>
       </div>
       <Footer />

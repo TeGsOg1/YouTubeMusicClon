@@ -2,7 +2,7 @@ export interface Song {
   id: string;
   title: string;
   image: string;
-  artists: string[];
+  artists: string;
   duration: string;
   lyric: string;
 }
@@ -12,7 +12,7 @@ export const songs: Song[] = [
     id: '1',
     title: "The Nights",
     image: "https://i.scdn.co/image/ab67616d0000b2730ae4f4d42e4a09f3a29f64ad",
-    artists: ["Avicii"],
+    artists: "Avicii",
     duration: "2:56",
     lyric: `(Hey) Once upon a younger year
     When all our shadows disappeared
@@ -86,7 +86,7 @@ export const songs: Song[] = [
     id: '2',
     title: "Cupid (Twin Ver.)",
     image: "https://i.scdn.co/image/ab67616d0000b27337c0b3670236c067c8e8bbcb",
-    artists: ["FIFTY-FIFTY"],
+    artists: "FIFTY-FIFTY",
     duration: "3:34",
     lyric: `(La-la-la, la-la-la)
     (La-la-la-la, la-la-la-la)
@@ -147,7 +147,7 @@ export const songs: Song[] = [
     id: '3',
     title: "Tu Falta de Querer",
     image: "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/6c/e6/c7/6ce6c71b-9c90-9040-622e-524f1a878135/15UMGIM37781.rgb.jpg/1200x1200bf-60.jpg",
-    artists: ["Mon Laferte"],
+    artists: "Mon Laferte",
     duration: "4:05",
     lyric: `Hoy volví a dormir en nuestra cama
     Y todo sigue igual
@@ -192,7 +192,7 @@ export const songs: Song[] = [
     id: '4',
     title: "Until I Found You (Piano Version)",
     image: "https://i.scdn.co/image/ab67616d0000b273eabddae72a3b1a5ed51d1ac6",
-    artists: ["Stephen Sanchez"],
+    artists: "Stephen Sanchez",
     duration: "3:15",
     lyric: `Georgia
     Wrap me up in all your
@@ -228,7 +228,7 @@ export const songs: Song[] = [
     id: '5',
     title: "Un Osito de Peluche de Taiwán",
     image: "https://www.losautenticosdecadentes.com.ar/img/albumes/sigue-tu-camino.jpg",
-    artists: ["Los Auténticos Decadentes"],
+    artists: "Los Auténticos Decadentes",
     duration: "4:47",
     lyric: `Dentro de tus ojos veo un lago donde un hada
     Se desnuda para que la adore el Sol
@@ -306,7 +306,7 @@ export const songs: Song[] = [
     id: '6',
     title: "King Of The Jungle",
     image: "https://i.scdn.co/image/ab67616d0000b273c75d7b12b6b6eacea1e21068",
-    artists: ["Shanguy"],
+    artists: "Shanguy",
     duration: "2:39",
     "lyric": `Viens j't'emmène sur ma planète
     Ici c'est pas comme à l'école
@@ -365,7 +365,7 @@ export const songs: Song[] = [
     id: '7',
     title: "Vivir Mi Vida",
     image: "https://i.scdn.co/image/ab67616d0000b27321be16e998effa9f1f4b63a9",
-    artists: ["Marc Anthony"],
+    artists: "Marc Anthony",
     duration: "4:11",
     "lyric": `(Voy a reír, voy a bailar)
     (Vivir mi vida, la la la la)
@@ -433,7 +433,7 @@ export const songs: Song[] = [
     id: '8',
     title: "La Camisa Negra",
     image: "https://i.scdn.co/image/ab67616d0000b273c091c40987e92a9256d2f210",
-    artists: ["Juanes"],
+    artists: "Juanes",
     duration: "3:36",
     lyric: `(No por pobre y feo hombre, ¿pero antojao'?)
     (Ay, no)
@@ -516,7 +516,7 @@ export const songs: Song[] = [
     id: '9',
     title: "Bailando",
     image: "https://i.scdn.co/image/ab67616d0000b273c725c87a1394f9558e7fa9c8",
-    artists: ["Enrique Iglesias"],
+    artists: "Enrique Iglesias",
     duration: "4:03",
     lyric: `Enrique Iglesias
     One love, one love
@@ -608,7 +608,7 @@ export const songs: Song[] = [
     id: '10',
     title: "Danza Kuduro",
     image: "https://lh3.googleusercontent.com/WZx94Asj29Zm7VkrxrEsk4dQzg0mPbGChm-1jhX8LQIgAkJ1mcRdq2o9CwAjZIUJm6O9pViJxxhuUto=w544-h544-l90-rj",
-    artists: ["Don Omar"],
+    artists: "Don Omar",
     duration: "3:18",
     lyric: `A&X
     El Orfanato
@@ -730,7 +730,7 @@ export const songs: Song[] = [
     id: '11',
     title: "Limón y Sal",
     image: "https://i.scdn.co/image/ab67616d0000b273a043fa84be801dca33dacca1",
-    artists: ["Julieta Venegas"],
+    artists: "Julieta Venegas",
     duration: "3:25",
     lyric: `Tengo que confesar que a veces
     No me gusta tu forma de ser
@@ -785,7 +785,7 @@ export const songs: Song[] = [
     id: '12',
     title: "Matador",
     image: "https://images.genius.com/5e94e386f9f2c1199cf15eb98286ec73.960x960x1.png",
-    artists: ["Los Fabulosos Cadillacs"],
+    artists: "Los Fabulosos Cadillacs",
     duration: "4:34",
     lyric: `Te están buscando matador
 

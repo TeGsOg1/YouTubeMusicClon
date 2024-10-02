@@ -1,70 +1,46 @@
 ---
 import type { GetStaticPaths } from "astro";
 import Layout from "@/layouts/Layout.astro";
-import { songs } from "@/lib/songData";
-import BackPage from "@/components/BackPage.astro"
-import Image from "astro/components/Image.astro";
-
-
+import { artists } from "@/lib/artistData";
+import { ArtistSongs } from "@/components/ArtistSongs";
 export const getStaticPaths: GetStaticPaths = () => {
-  return songs.map((song) => ({
-    params: { id: song.id.toString() },
+  return artists.map((artist) => ({
+    params: { id: artist.id.toString() },
   }));
 };
 
 const { id } = Astro.params;
-const song = songs.find((song) => song.id.toString() === id);
+const artist = artists.find((artist) => artist.id.toString() === id);
 ---
 
 <Layout 
-description=`YTMC ${song?.title} lyrics and cover`
-title=`YTM Clon ${song?.title}`>
-  <BackPage />
-  <div
-    class="grid grid-flow-row mr-20 lg:mr-0 lg:grid-cols-2 gap-10 w-full  "
-  >
-    <div class="flex flex-col h-full px-7 relative  order-2 lg:order-1 items-center justify-items-center">
-      <img 
-      src={song?.image} 
-      class="animate-fade-in animate-delay-150 blur-[27px] min-w-[50px] h-auto lg:w-[700px] px-7 rounded-xl object-cover right-0 left-0 my-0 mx-auto -z-10 absolute" alt="">
-
-      <Image
-        src=`${song?.image}`
-        alt=`${song?.title} cover`
-        width={650}
-        height={650}
-        loading={"eager"}
-        transition:name={`${id} image`}
-        class=" min-w-[200px] h-auto lg:w-[650px] rounded-xl object-cover aspect-auto"
-      />
-      
-      <p
-        class="text-gray-400 text-2xl text-center text-wrap truncate lg:text-start flex flex-col lg:text-3xl lg:pt-4"
-        transition:name={`${id} artist`}
-        >
-        {song?.artists}
-      </p>
-      <div class="block md:hidden">
+description=`YTMC ${artist?.name} musics`
+title=`YTM Clon ${artist?.name}`>
+  <div class="w-full h-full">
+    <div class="relative w-full h-[500px]">
+      <img
+      class="w-full h-full object-cover" 
+      src=`${artist?.cover}` alt=`${artist?.name} cover`>
+      <div class="absolute bottom-0 mb-16 ml-10">
+        <span class=" text-white text-4xl font-bold"
+              transition:name=`artist ${artist?.id}`>
+          {artist?.name}
+        </span>
       </div>
     </div>
-  <div class="order-1 lg:order-2 w-full  h-auto max-h-[1400px]">
-    <h1
-    transition:name=`${id} title`
-    class=" md:hidden text-3xl md:text-5xl text-pretty lg:text-5xl text-center lg:text-start text-white max-w-90"
-    >
-    {song?.title}
-  </h1>
-      <div id="lyrics" class="hidden lg:block h-auto max-h-[600px] overflow-y-auto p-5 rounded-2xl bg-gradient-to-b from-slate-800 to-transparent">
-        <p class="text-white text-2xl whitespace-pre-line ">
-          {song?.lyric}
-        </p>
-      </div>
+    <div class="mt-4 ml-10 h-full">
+      <h1 class="text-white text-2xl font-semibold mb-4">Canciones</h1>
+      <ArtistSongs id={id} client:load/>
     </div>
   </div>
+</slot>
 </Layout>
 
 <style>
   #lyrics {
     scrollbar-color: #4B5563 #1F2937;
+  }
+  img {
+    mask-image: linear-gradient(black 70%, transparent);
   }
 </style>

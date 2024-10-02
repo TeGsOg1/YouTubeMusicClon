@@ -1,7 +1,7 @@
 import { Play, Pause } from './Player';
 import { usePlayerStore } from '@/store/PlayerStore';
 
-export function CardPlayButton({ id }) {
+export function CardPlayButton({ id, padding }) {
   const {
     currentMusic,
     isPlaying,
@@ -27,7 +27,7 @@ export function CardPlayButton({ id }) {
     }
 
     return(
-    <button onClick={handleClick} className=' w-full bg-slate-400'>
+    <button onClick={handleClick} className={`absolute z-10 opacity-0 active:opacity-85 w-full h-full md:hover:opacity-85 active:transition-opacity inset-0 bg-slate-400 ${padding}`}>
       {isPlaying && currentMusic.song.id == id ? <Pause /> : <Play />}
     </button>
   );

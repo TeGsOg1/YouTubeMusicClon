@@ -13,28 +13,23 @@ const { id, title, artists, image } = song
 
 <article 
   class="flex flex-col relative min-w-48 h-auto p-2 rounded-lg bg-opacity-10 bg-gradient-to-b from-gray-700 to-transparent hover:bg-opacity-100  transition-all">
-    <div 
-      class="absolute z-10 opacity-0 active:opacity-85 w-44 h-44 md:hover:opacity-85 active:transition-opacity inset-0 ml-2 mt-2 p-10 bg-slate-400 ">
-        <CardPlayButton id=`${id}` client:visible />
-    </div>
   <picture class="relative">
-      <Image
-        decoding={`auto`}
-        src=`${ image }`
-        alt=`${ title } cover`
-        width={320}
-        height={320}
-        transition:name=`${ id } image`
-        loading="eager"
-          />
+    <Image
+    decoding={`auto`}
+    src=`${ image }`
+    alt=`${ title } cover`
+    width={320}
+    height={320}`
+    loading="eager"
+    />
+    <CardPlayButton padding="p-10" id=`${id}` client:visible />
     </picture>
   <h1 class="text-white justify-start text-lg  sm:text-xl mt-1"
-    transition:name=`${ id } title`
   >{ title }</h1>
-  <h2 
+  <a href={`/artist/${ id }`} 
    class="text-md sm:text-xl text-gray-400 hover:text-gray-300 active:text-gray-300 transition-colors" 
-   transition:name=`${ id } artist`
+   transition:name=`artist ${ id }`
    >
      { artists }
-  </h2>
+  </a>
 </article>

@@ -147,7 +147,7 @@ export const Loop = () => (
 );
 
 
-const CurrentSong = ({ image, title, artists }) => {
+const CurrentSong = ({ image, title, artists, id }) => {
   const { isPlayerOpen } = usePlayerStore();
   const isMobile = window.innerWidth < 768;
   const songInfo = isMobile && isPlayerOpen ? "songInfoOpen" : "songInfo";
@@ -178,7 +178,7 @@ const CurrentSong = ({ image, title, artists }) => {
       </div>
       <div className={songInfoText}>
         <span className={songInfoTitle}>{title}</span>
-        <span className={songInfoArtist}>{artists}</span>
+        <a href={`artist/${id}`} className={songInfoArtist}>{artists}</a>
       </div>
     </section>
   );
