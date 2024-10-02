@@ -10,7 +10,7 @@ export const ArtistSongs = ({ id }) => {
         <ul className="w-full">
             {artistSongs.map((song) => (
                 <li className="flex w-full items-center gap-4" key={song.id}>
-                    <div className="relative">
+                    <div className="relative size-14">
                             <CardPlayButton padding="p-3" id={song.id} />
                         <img src={song.image} className=" size-14" alt={song.title} />
                     </div>
