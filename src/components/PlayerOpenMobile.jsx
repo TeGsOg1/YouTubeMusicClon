@@ -38,6 +38,7 @@ export const AudioControlsMobile = ({audio}) => {
           min={0}
           max={audio?.current?.duration ?? 0}
           className="w-[100%]"
+          onClick={(e) => {e.stopPropagation()}}
           onValueChange={(value) => {
             const [newTimeUpdate] = value;
             audio.current.currentTime = newTimeUpdate;
@@ -54,7 +55,7 @@ export const AudioControlsMobile = ({audio}) => {
 
 export const PlayerImageMobile = ({image, title, artists}) => {
     return (
-      <div className='flex flex-col gap-4'>
+      <div onClick={(e) => {e.stopPropagation()}} className='flex flex-col gap-4'>
         <div className="w-full h-full flex justify-center items-center p-10 relative">
             <img 
                 src={image} 
@@ -100,7 +101,9 @@ export const PlayerOpenMobile = ({audio}) => {
         <div className='mt-5'>
             <AudioControlsMobile audio={audio} />
             <PlayerButtons audio={audio}>
-            <button onClick={handleClick} className='PlayButtonMobile bg-white p-6 rounded-full'>
+            <button onClick={(e) => {
+              e.stopPropagation();
+              handleClick();}} className='PlayButtonMobile bg-white p-6 rounded-full'>
                 {isPlaying ? <Pause className='fill-black'/> : <Play className='fill-black'/>}
             </button>
           </PlayerButtons>
