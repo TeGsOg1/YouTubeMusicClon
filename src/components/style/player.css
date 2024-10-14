@@ -1,4 +1,5 @@
 .player {
+    position: relative;
     display: flex;
     flex-direction: row;
     position: relative;
@@ -8,70 +9,9 @@
     gap: 1rem; /* 4 * 0.25rem */
     justify-content: space-between;
     align-items: center;
-    z-index: 100;
+    z-index: 40;
     color: white;
     background-color: #1f2937;
-    transition: all .7s;
-}
-
-
-
-#img {
-    z-index: -1;
-    width: 1000px;
-    border-radius: 5px;
-    transition: all .7s;
-
-}
-
-.songInfo {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    justify-content:flex-start;
-    align-items: center;
-    width: 100%; 
-    transition: all .7s;
-}
-
-.songInfoImgContainer {
-    min-width: 64px;
-    min-height: 64px;
-    position: relative;
-    border-radius: 5px;
-    transition: all .7s;
-}
-
-.songInfoImg {
-    z-index: 50;
-    width: 64px;
-    height: 64px;
-    transition: all .7s;
-}
-
-.songInfoText {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    white-space: nowrap;
-    box-sizing: border-box;
-}
-
-.songInfoTitle {
-    font-size: 1.2rem;
-}
-
-.songInfoArtist {
-    display: flex;
-    font-size: 1.1rem;
-    opacity: 0.7;
-
-}
-
-.audioControlsContainer {
-    display: grid;
-    place-content: center;
-    z-index: 200;
 }
 
 .playerDesk {
@@ -102,39 +42,14 @@
     scrollbar-color: white transparent;
 }
 
-.audioControlsButtons {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    align-items: center;
+.arrowUp {
+    transform: rotateX(0deg);
 }
 
-.audioControlsPauseButton {
-    width: 42px;
-    height: 42px;
-}
 
-.arrow {
-    display: block;
-    width: 0.5rem;
-    justify-content: center;
-    align-items: center;
-    transition: all .5s;
-}
-
-.arrow.Down {
+.arrowDown {
     transform: rotateX(180deg);
-    transition: all .5s;
 }
-
-.arrowUpMobile {
-    display: none;
-}
-
-.arrowDownMobile {
-    display: none;
-}
-
 
 @media (width < 1024px) {
     .playerDesk {
@@ -147,68 +62,24 @@
         display: none;
     }
 
+    .playerMobile {
+        top: 0;
+        transition: all .2s;
+    }
+    
+    .playerMobileOpen {
+        top: 100%;
+        transition: all .2s;
+    }
+
     .audioControlsContainer {
         display: none;
     }
 
-    .audioControlsContainerOpen {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-        width: 100%;
-        z-index: 200;
-        transition: all .5s;
-    }
-
-    .audioControlsButtonsMobile {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1.5rem;
-    }
-
-    .audioControlsPauseButtonMobile {
-        background-color: white;
-        padding: 1.5rem;
-        min-width: 1.5rem;
-        border-radius: 50%;
-    }
-    .audioControlsPauseButtonMobile {
-        width: 82px;
-    }
-    .audioControlsPauseButtonMobile svg {
+    .PlayButtonMobile svg {
         fill: black;
     }
-    .playerOpen {
-        display: flex;
-        flex-direction: column-reverse;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: calc(100vh - 3.5rem);
-        padding-inline: 16px;
-        gap: 16px;
-        z-index: 100;
-        color: white;
-        background-color: #1f2937;
-        transition: all .7s;
-    }
 
-    .arrowDownMobile {
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 0;
-        margin-top: 3rem;
-        margin-left: 1rem;
-        transform: rotateX(180deg);
-        z-index: 100;
-        background-color: #303c4d;
-        border-radius: 50%;
-        transition: all .7s;
-    }
 
     .arrowUpMobile {
         display: block;
@@ -220,83 +91,14 @@
         border-radius: 50%;
         transition: all .7s;
     }
+}
 
-    .player {
-        justify-content: space-between;
+@media (width<480px) {
+    .SongArtist span {
+        max-width: 10rem;
     }
 
-    .songInfo {
-        min-width: none;
-        width: auto;
-        max-width: 230px;
-        overflow: hidden;
-    }
-
-    .songInfoText {
-        width: 100%;
-    }
-
-    .songInfoTitle {
-        text-overflow: ellipsis;
-    }
-
-    .songInfoArtist {
-        text-overflow: ellipsis;
-    }
-
-    .songInfoOpen{
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
-        padding-top: 0.5rem;
-        width: 100%;
-        transition: all .7s;
-    }
-
-    .songInfoImgContainerOpen {
-        width: 100%;
-        height: 100%;
-        padding: 16px;
-        margin-top: 64px;
-        border-radius: 5px;
-        transition: all .7s;
-    }
-
-    .songInfoImgOpen {
-        width: 100%;
-        height: 100%;
-        z-index: 100;
-        object-fit: contain;
-        border-radius: 10px;
-        transition:all .7s;
-    }
-
-    .songInfoTextOpen {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        white-space: nowrap;
-        box-sizing: border-box;
-        transition: all 1s;
-    }
-    
-    .songInfoTitleOpen{
-        display: inline-block;
-        font-size: 1.8rem;
-        transition: all 1s;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    .songInfoArtistOpen{
-        display: inline-block;
-        font-size: 1.4rem;
-        opacity: 0.7;
-        transition: all 1s;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+    .SongArtist a {
+        max-width: 10rem;
     }
 }

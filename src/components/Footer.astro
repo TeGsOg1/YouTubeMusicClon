@@ -4,7 +4,7 @@ import NavMobile from './NavMobile.astro'
 ---
 <footer class="fixed bottom-0 flex flex-col w-full  z-40">
     <div class="w-full block">
-      <Player client:only transition:name="media-player" transition:persist/>
+      <Player client:load transition:name="media-player" transition:persist/>
     </div>
     <div class=" border-t-2 border-t-gray-600">
       <NavMobile />

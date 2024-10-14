@@ -1,9 +1,9 @@
 import { usePlayerStore } from "@/store/PlayerStore";
 import { useEffect, useRef, useState } from "react";
+import { PlayerOpenMobile } from "@/components/PlayerOpenMobile";
 import { Slider } from "./Slider";
 import { SliderDesk } from "./SliderDesk";
-import '@/components/style/player.css';
-
+import "@/components/style/player.css";
 
 export const Pause = () => (
   <svg
@@ -125,49 +125,32 @@ export const Volume = () => (
 export const ArrowUp = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="52"
-    height="52"
+    width="32"
+    height="32"
     viewBox="0 0 24 24"
   >
-    <path fill="#ffffff" d="m7 14l5-5l5 5z"></path>
+    <path
+      fill="currentColor"
+      d="m12 10.828l-4.95 4.95l-1.414-1.414L12 8l6.364 6.364l-1.414 1.414z"
+    />
   </svg>
 );
 
 export const Loop = () => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="#ffffff"
-  >
-        <g >
-          <path d="M21,13h1v5L3.93,18.03l2.62,2.62l-0.71,0.71L1.99,17.5l3.85-3.85l0.71,0.71l-2.67,2.67L21,17V13z M3,7l17.12-0.03 l-2.67,2.67l0.71,0.71l3.85-3.85l-3.85-3.85l-0.71,0.71l2.62,2.62L2,6v5h1V7z"></path>
-        </g>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="#ffffff">
+    <g>
+      <path d="M21,13h1v5L3.93,18.03l2.62,2.62l-0.71,0.71L1.99,17.5l3.85-3.85l0.71,0.71l-2.67,2.67L21,17V13z M3,7l17.12-0.03 l-2.67,2.67l0.71,0.71l3.85-3.85l-3.85-3.85l-0.71,0.71l2.62,2.62L2,6v5h1V7z"></path>
+    </g>
   </svg>
 );
 
-
 const CurrentSong = ({ image, title, artists, id }) => {
   const { isPlayerOpen } = usePlayerStore();
-  const isMobile = window.innerWidth < 768;
-  const songInfo = isMobile && isPlayerOpen ? "songInfoOpen" : "songInfo";
-  const songInfoImg =
-    isMobile && isPlayerOpen ? "songInfoImgOpen" : "songInfoImg";
-  const songInfoTitle =
-    isMobile && isPlayerOpen ? "songInfoTitleOpen" : "songInfoTitle";
-  const songInfoArtist =
-    isMobile && isPlayerOpen ? "songInfoArtistOpen" : "songInfoArtist";
-  const songInfoText =
-    isMobile && isPlayerOpen ? "songInfoTextOpen" : "songInfoText";
-  const songInfoImgContainer =
-    isMobile && isPlayerOpen
-      ? "songInfoImgContainerOpen"
-      : "songInfoImgContainer";
 
   return (
-    <section className={songInfo}>
-      <div className={songInfoImgContainer}>
-        <img src={image} className={songInfoImg} alt={title} />
+    <section className="flex flex-row gap-4 justify-start items-center w-full transition-all">
+      <div className="relative min-w-16 min-h-16 rounded-md transition-all">
+        <img src={image} className="z-40 size-16 transition-all" alt={title} />
         {isPlayerOpen && (
           <img
             id="img"
@@ -176,9 +159,9 @@ const CurrentSong = ({ image, title, artists, id }) => {
           ></img>
         )}
       </div>
-      <div className={songInfoText}>
-        <span className={songInfoTitle}>{title}</span>
-        <a href={`artist/${id}`} className={songInfoArtist}>{artists}</a>
+      <div className="SongArtist flex flex-col w-full">
+        <span className="text-xl whitespace-nowrap overflow-hidden text-ellipsis">{title}</span>
+        <a href={`artist/${id}`} className="text-lg  whitespace-nowrap overflow-hidden text-ellipsis">{artists}</a>
       </div>
     </section>
   );
@@ -191,7 +174,7 @@ const VolumeControls = () => {
 
   const isVolumeMuted = volume === 0;
 
-  const volumeClick = () => {
+  const handleClickVolume = () => {
     if (isVolumeMuted) {
       setVolume(previousVolumeRef.current);
     } else {
@@ -202,7 +185,10 @@ const VolumeControls = () => {
 
   return (
     <div className="flex justify-center justify-items-center  text-white gap-3">
-      <button onClick={volumeClick}>
+      <button onClick={(e) => {
+          e.stopPropagation();
+          handleClickVolume();
+        }}>
         {volume === 0 ? <VolumeMute /> : <Volume />}
       </button>
       <Slider
@@ -221,129 +207,85 @@ const VolumeControls = () => {
   );
 };
 
-export const AudioControlsMobile = ({audio}) => {
-  const { currentTime, setCurrentTime } = usePlayerStore(state=>state);
+export const AudioControlsDesk = ({ audio }) => {
+  const { currentTime, setCurrentTime } = usePlayerStore((state) => state);
 
   const handleTimeUpdate = () => {
-    setCurrentTime(audio.current.currentTime)
-  }
+    setCurrentTime(audio.current.currentTime);
+  };
 
   useEffect(() => {
-    audio.current.addEventListener('timeupdate', handleTimeUpdate)
+    audio.current.addEventListener("timeupdate", handleTimeUpdate);
     return () => {
-      audio.current.removeEventListener('timeupdate', handleTimeUpdate)
-    }
+      audio.current.removeEventListener("timeupdate", handleTimeUpdate);
+    };
   }, []);
-
-  const formatTime = time => {
-    if(time == null) return '00:00';
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
-  }
-
-  const duration = audio?.current?.duration ?? 0;
-
-  return(
-    <div className="flex flex-col gap-4 px-2 w-full">
-      
-      <div className="w-full">
-
-      <Slider
+  return (
+    <div className="hidden md:block absolute z-50 top-0 right-0 left-0">
+      <SliderDesk
         value={[currentTime]}
         min={0}
         max={audio?.current?.duration ?? 0}
-        className="w-[100%]"
+        className="w-full"
         onValueChange={(value) => {
           const [newTimeUpdate] = value;
           audio.current.currentTime = newTimeUpdate;
         }}
-        />
-      </div>
-      <div className="w-full flex justify-between">    
-        <span className=" opacity-70">{formatTime(currentTime)}</span>
-        <span className="opacity-70">{duration ? formatTime(duration): null}</span>
-      </div>
-    </div>
-  )
-}
-
-export const AudioControlsDesk = ({audio}) => {
-  const { currentTime, setCurrentTime } = usePlayerStore(state=>state);
-
-  const handleTimeUpdate = () => {
-    setCurrentTime(audio.current.currentTime)
-  }
-
-  useEffect(() => {
-    audio.current.addEventListener('timeupdate', handleTimeUpdate)
-    return () => {
-      audio.current.removeEventListener('timeupdate', handleTimeUpdate)
-    }
-  }, []);
-  return(
-    <div className="hidden md:block absolute z-50 top-0 right-0 left-0">
-      <SliderDesk
-      value={[currentTime]}
-      min={0}
-      max={audio?.current?.duration ?? 0}
-      className="w-full"
-      onValueChange={(value) => {
-        const [newTimeUpdate] = value;
-        audio.current.currentTime = newTimeUpdate;
-      }}
       />
-  </div>
-  )
-}
+    </div>
+  );
+};
 
-export const PlayerButtons = ({audio, children}) => {
-  const { currentTime, setCurrentTime,  isPlayerOpen } = usePlayerStore(state=>state);
+export const PlayerButtons = ({ audio, children }) => {
+  const { currentTime, setCurrentTime } = usePlayerStore(
+    (state) => state
+  );
 
   const handleClickBack = () => {
     setCurrentTime(0);
     audio.current.currentTime = 0;
   };
 
-  
-
-  const formatTime = time => {
-    if(time == null) return '00:00';
+  const formatTime = (time) => {
+    if (time == null) return "00:00";
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
-    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
-  }
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
+      2,
+      "0"
+    )}`;
+  };
 
   const duration = audio?.current?.duration ?? 0;
 
+  return (
+    <div className="flex flex-row justify-center items-center gap-6">
+      <button onClick={(e) => {
+          e.stopPropagation();
+          handleClickBack();
+        }} className="w-7 h-7">
+        <Back />
+      </button>
 
-  const isMobile = window.innerWidth < 768;
-  const playerControlsButtons = isMobile && isPlayerOpen
-    ? "audioControlsButtonsMobile"
-    : "audioControlsButtons";
+      {children}
 
-  return(
-    <div className={playerControlsButtons}>
-
-        <button onClick={handleClickBack} className="w-7 h-7" >
-          <Back />
-        </button>
-
-        {children}
-
-        <button className="w-7 h-7">
-           <Next />
-        </button>
-        <div className="hidden md:flex gap-1">
-          <span className="opacity-70 ">{formatTime(currentTime)}</span>
-          <span className="opacity-70"> / </span>
-          <span className="opacity-70">{duration ? formatTime(duration): null}</span>
-        </div>
+      <button onClick={(e) => {
+          e.stopPropagation();
+        }} className="w-7 h-7">
+        <Next />
+      </button>
+      <div className="hidden md:flex gap-1">
+        <span className="opacity-70 ">{formatTime(currentTime)}</span>
+        <span className="opacity-70"> / </span>
+        <span className="opacity-70">
+          {duration ? formatTime(duration) : null}
+        </span>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export const LoopButton = ({audio}) => {
+export const LoopButton = ({ audio }) => {
   const { currentTime, setCurrentTime } = usePlayerStore();
   const [isLooping, setIsLooping] = useState(false);
 
@@ -354,19 +296,32 @@ export const LoopButton = ({audio}) => {
   useEffect(() => {
     if (isLooping && currentTime === audio.current.duration) {
       setCurrentTime(0);
-      audio.current.play()
+      audio.current.play();
     }
   }, [currentTime]);
 
   return (
-    <button onClick={handleClick} className={isLooping ? "opacity-100" : "opacity-70"}>
+    <button
+      onClick={(e) => {
+        e.stopPropagation();
+        handleClick();
+      }}
+      className={isLooping ? "opacity-100" : "opacity-70"}
+    >
       <Loop />
     </button>
   );
-}
+};
 
 export function Player() {
-  const { currentMusic, isPlaying, setIsPlaying, volume, isPlayerOpen, setIsPlayerOpen } = usePlayerStore();
+  const {
+    currentMusic,
+    isPlaying,
+    setIsPlaying,
+    volume,
+    isPlayerOpen,
+    setIsPlayerOpen,
+  } = usePlayerStore();
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -383,72 +338,61 @@ export function Player() {
     }
   }, [currentMusic]);
 
-
   useEffect(() => {
     audioRef.current.volume = volume;
   }, [volume]);
 
   const handleClick = () => {
-    if(currentMusic.song){
-    setIsPlaying(!isPlaying);
-    }
+    if (currentMusic.song) setIsPlaying(!isPlaying);
   };
 
   const handleClickOpen = () => {
-    setIsPlayerOpen(!isPlayerOpen);
+    if (currentMusic.song) setIsPlayerOpen(!isPlayerOpen);
   };
-  const isMobile = window.innerWidth < 768;
-  const player = isMobile && isPlayerOpen ? "playerOpen" : "player";
-  const playerControlsContainer = isMobile && isPlayerOpen 
-    ? "audioControlsContainerOpen" 
-    : "audioControlsContainer";
-    const playerControlsPauseButton = isMobile && isPlayerOpen
-    ? "audioControlsPauseButtonMobile"
-    : "audioControlsPauseButton";
-  const ArrowMobile = isMobile && isPlayerOpen 
-    ? "arrowDownMobile" 
-    : "arrowUpMobile";
-  const Arrow = !isMobile && isPlayerOpen 
-    ? "arrow Down" 
-    : "arrow Up";
+
+  const Arrow = isPlayerOpen ? "arrowDown" : "arrowUp";
 
   return (
-    <div className={player}>
+    <div onClick={handleClickOpen} className="player">
+      <div className="hidden md:flex justify-center rotate items-center z-40">
+        <PlayerButtons audio={audioRef}>
+          <button onClick={(e) => {
+          e.stopPropagation();
+          handleClick();
+        }} className="hidden md:block size-[42px]">
+            {isPlaying ? <Pause /> : <Play />}
+          </button>
+        </PlayerButtons>
 
-      <div className={playerControlsContainer}> 
-          {isMobile && isPlayerOpen && <AudioControlsMobile audio={audioRef} />}
-          <PlayerButtons audio={audioRef}>
-            <button onClick={handleClick} className={playerControlsPauseButton}>
-                {isPlaying ? <Pause /> : <Play />}
-            </button>
-          </PlayerButtons>
-
-          <audio ref={audioRef} />
+        <audio ref={audioRef} />
       </div>
-      
+
       <div>
         <CurrentSong {...currentMusic.song} />
       </div>
       <div className="hidden md:flex mr-8 gap-3">
         <LoopButton audio={audioRef} />
         <VolumeControls />
-        <button className={Arrow} onClick={handleClickOpen}>
+        <button
+          className={`${Arrow} hidden md:block w-2 justify-center items-center transition-all`}
+          onClick={handleClickOpen}
+        >
           <ArrowUp />
         </button>
       </div>
       {!isPlayerOpen && (
-        <div className="w-24 pt-2 md:hidden">
-          <button onClick={handleClick}>
+        <div className="min-w-10 z-50 pt-2 md:hidden">
+          <button onClick={(e) => {
+          e.stopPropagation();
+          handleClick();
+        }}>
             {isPlaying ? <Pause /> : <Play />}
           </button>
         </div>
-
       )}
+      <PlayerOpenMobile audio={audioRef} />
 
-        <button className={ArrowMobile} onClick={handleClickOpen}>
-        <ArrowUp />
-      </button>
-        <AudioControlsDesk audio={audioRef} />
+      <AudioControlsDesk audio={audioRef} />
     </div>
   );
 }
