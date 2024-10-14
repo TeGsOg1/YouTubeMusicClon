@@ -161,7 +161,7 @@ const CurrentSong = ({ image, title, artists, id }) => {
       </div>
       <div className="SongArtist flex flex-col w-full">
         <span className="text-xl whitespace-nowrap overflow-hidden text-ellipsis">{title}</span>
-        <a href={`artist/${id}`} className="text-lg  whitespace-nowrap overflow-hidden text-ellipsis">{artists}</a>
+        <span className="text-lg  whitespace-nowrap overflow-hidden text-ellipsis">{artists}</span>
       </div>
     </section>
   );
