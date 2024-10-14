@@ -196,6 +196,7 @@ const VolumeControls = () => {
         min={0}
         max={100}
         value={[volume * 100]}
+        onClick={(e) => {e.stopPropagation()}}
         className="w-24"
         onValueChange={(value) => {
           const [newVolume] = value;
@@ -227,6 +228,7 @@ export const AudioControlsDesk = ({ audio }) => {
         min={0}
         max={audio?.current?.duration ?? 0}
         className="w-full"
+        onClick={(e) => {e.stopPropagation()}}
         onValueChange={(value) => {
           const [newTimeUpdate] = value;
           audio.current.currentTime = newTimeUpdate;
