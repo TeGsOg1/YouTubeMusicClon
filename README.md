@@ -1,3 +1,3 @@
-# YouTube Music Clon (Work In Progress)
+# YouTube Music Clon
 
-Este proyecto es un clon de YouTube Music, construido utilizando **Astro Build** y componentes de **React**. 
+Un clon creado con **AstroBuild 🚀** y componentes de **React**. Con un diseño responsive adaptado a todos los dispositivos.
