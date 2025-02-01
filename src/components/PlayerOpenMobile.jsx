@@ -57,10 +57,6 @@ export const PlayerImageMobile = ({image, title, artists}) => {
     return (
       <div onClick={(e) => {e.stopPropagation()}} className='flex flex-col gap-4'>
         <div className="w-full h-full flex justify-center items-center p-10 relative">
-            <img 
-                src={image} 
-                alt={`${title} blurred image`}
-                className="animate-fade-in animate-delay-150 blur-[27px] h-full w-full max-w-[3000px] max-h-[3000px] object-contain right-0 left-0 my-0 p-10 mx-auto -z-10 absolute"></img>
             <picture className="w-full h-full justify-center items-center flex">
                 <img 
                 className=" object-contain rounded-xl w-full h-full max-w-[280px] max-h-[280px]" 
@@ -106,6 +102,10 @@ export const PlayerOpenMobile = ({audio}) => {
 
     return (
       <div className={`${PlayerOpen} fixed md:hidden flex flex-col justify-between bottom-0 h-dvh w-full left-0 right-0 px-4 z-50 bg-black`}>
+        <img 
+                src={currentMusic?.song?.image} 
+                alt={`${currentMusic?.song?.title} blurred image`}
+                className={`${!isPlayerOpen ? "hidden" : "" }  animate-fade-in animate-delay-150 blur-[90px] h-full w-full object-cover right-0 left-0 my-0 p-10 mx-auto -z-10 absolute`}></img>
         <div className='min-h-16 w-full flex items-center'>
           <button onClick={handleClickOpen} className='rotate-180'>
             <ArrowUp />
@@ -136,13 +136,13 @@ export const PlayerOpenMobile = ({audio}) => {
           </div>
         </section>
         }
-      <div className='w-full min-h-14 border-t flex flex-row'>
+      <div className='w-full min-h-14 flex flex-row'>
         <button onClick={(e) => {
                 e.stopPropagation();
-                handleClickSong();}} className='w-full text-xl h-full font-bold border-r text-white active:bg-white active:text-black transition-all'>Canción</button>
+                handleClickSong();}} className='w-full text-xl h-full font-semibold text-white active:bg-white active:bg-center active:text-black transition-colors'>Canción</button>
         <button onClick={(e) => {
           e.stopPropagation();
-          handleClickLyric();}} className='w-full h-full text-xl font-bold text-white active:bg-white active:text-black transition-all'>Letra</button>
+          handleClickLyric();}} className='w-full h-full text-xl font-semibold active:bg-white active:bg-center active:text-black transition-colors'>Letra</button>
       </div>
       </div>
     )

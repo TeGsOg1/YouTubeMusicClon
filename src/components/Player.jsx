@@ -144,20 +144,13 @@ export const Loop = () => (
   </svg>
 );
 
-const CurrentSong = ({ image, title, artists, id }) => {
+const CurrentSong = ({ image, title, artists }) => {
   const { isPlayerOpen } = usePlayerStore();
 
   return (
     <section className="flex flex-row gap-4 justify-start items-center w-full transition-all">
       <div className="relative min-w-16 min-h-16 rounded-md transition-all">
         <img src={image} className="z-40 size-16 transition-all" alt={title} />
-        {isPlayerOpen && (
-          <img
-            id="img"
-            src={image}
-            className="animate-fade-in animate-delay-150 blur-[27px] w-full h-auto px-7 rounded-xl object-cover right-0 left-0 top-0 my-0 mx-auto absolute"
-          ></img>
-        )}
       </div>
       <div className="SongArtist flex flex-col w-full">
         <span className="text-xl whitespace-nowrap overflow-hidden text-ellipsis">{title}</span>
