@@ -11,7 +11,7 @@
     align-items: center;
     z-index: 40;
     color: white;
-    background-color: #1f2937;
+    background-color: #0b111c;
 }
 
 .playerDesk {
@@ -38,6 +38,7 @@
     transition: all .5s;
 }
 
+
 .playerDesk :last-child {
     scrollbar-color: white transparent;
 }
@@ -54,6 +55,7 @@
 @media (width < 1024px) {
     .playerDesk {
         flex-direction: column;
+        gap: 1rem;
     }
 }
 

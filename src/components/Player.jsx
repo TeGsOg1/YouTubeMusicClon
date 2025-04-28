@@ -11,6 +11,8 @@ export const Pause = () => (
     fill="#fff"
     width={24}
     height={24}
+    cursor={"pointer"}
+
     preserveAspectRatio="xMidYMid meet"
     className="style-scope tp-yt-iron-icon"
     style={{
@@ -34,6 +36,7 @@ export const Play = () => (
     fill="#fff"
     width={24}
     height={24}
+    cursor={"pointer"}
     preserveAspectRatio="xMidYMid meet"
     className="style-scope tp-yt-iron-icon"
     style={{
@@ -144,17 +147,45 @@ export const Loop = () => (
   </svg>
 );
 
+export const Like = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <path fill="#fff" d="M2 10h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1m0 1v9h3v-9zm15.72 8.03l3-5c.18-.3.28-.66.28-1.03v-1a2 2 0 0 0-2-2h-5.61l1.46-5.44v-.02a.97.97 0 0 0-.26-.96l-6 6.01C8.22 9.95 8 10.45 8 11v7a2 2 0 0 0 2 2h6c.73 0 1.37-.39 1.72-.97M22 13c0 .59-.17 1.15-.47 1.61l-2.91 4.84C18.11 20.38 17.13 21 16 21h-6a3 3 0 0 1-3-3v-7c0-.83.34-1.58.88-2.12l6.71-6.72l.71.71c.53.53.7 1.29.51 1.97L14.69 9H19a3 3 0 0 1 3 3z" />
+  </svg>
+);
+
+export const Dislike = () => (
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <path fill="#ffffff" d="M21 15h-3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1m0-1V5h-3v9zM5.28 5.97l-3 5c-.18.3-.28.66-.28 1.03v1a2 2 0 0 0 2 2h5.61l-1.46 5.44v.02c-.09.33-.01.7.26.96l6.01-6l-.01-.01c.37-.36.59-.86.59-1.41V7a2 2 0 0 0-2-2H7c-.73 0-1.37.39-1.72.97M1 12c0-.59.17-1.15.47-1.61l2.91-4.84C4.89 4.62 5.87 4 7 4h6a3 3 0 0 1 3 3v7c0 .83-.33 1.58-.88 2.12l-6.71 6.72l-.71-.71c-.53-.53-.7-1.29-.51-1.97L8.31 16H4a3 3 0 0 1-3-3z"/>
+</svg>
+);
+
 const CurrentSong = ({ image, title, artists }) => {
-  const { isPlayerOpen } = usePlayerStore();
+  const { currentMusic, toggleLike, toggleDislike } = usePlayerStore(state => ({
+    currentMusic: state.currentMusic,
+    toggleLike: state.toggleLike,
+    toggleDislike: state.toggleDislike,
+  }));
 
   return (
     <section className="flex flex-row gap-4 justify-start items-center w-full transition-all">
       <div className="relative min-w-16 min-h-16 rounded-md transition-all">
-        <img src={image} className="z-40 size-16 transition-all" alt={title} />
+        <img src={currentMusic?.song?.image == undefined ? "./Image/Notsong.webp" : image} alt={currentMusic?.song?.image == undefined ? "Not Available" : `${title} cover`} className="z-40 size-16 transition-all" />
       </div>
       <div className="SongArtist flex flex-col w-full">
-        <span className="text-xl whitespace-nowrap overflow-hidden text-ellipsis">{title}</span>
-        <span className="text-lg  whitespace-nowrap overflow-hidden text-ellipsis">{artists}</span>
+        <span className="text-lg whitespace-nowrap overflow-hidden text-ellipsis">{currentMusic?.song?.title == undefined ? "No se encontró una canción" : title}</span>
+        <span className="text-sm  whitespace-nowrap overflow-hidden text-ellipsis">{artists}</span>
+      </div>
+      <div className="hidden md:flex flex-row" onClick={(e) => {
+        e.stopPropagation();
+      }}>
+        <button className="px-2 py-1 cursor-pointer rounded-full"
+        onClick={toggleLike}>
+          <Like/>
+        </button>
+        <button className="px-2 py-1 cursor-pointer rounded-full"
+        onClick={toggleDislike}>
+          <Dislike/>
+        </button>
       </div>
     </section>
   );
@@ -178,25 +209,26 @@ const VolumeControls = () => {
 
   return (
     <div className="flex justify-center justify-items-center  text-white gap-3">
-      <button onClick={(e) => {
-          e.stopPropagation();
-          handleClickVolume();
-        }}>
-        {volume === 0 ? <VolumeMute /> : <Volume />}
-      </button>
       <Slider
+        aria-label="Volumen"
         defaultValue={[100]}
         min={0}
         max={100}
         value={[volume * 100]}
-        onClick={(e) => {e.stopPropagation()}}
-        className="w-24"
+        onClick={(e) => { e.stopPropagation() }}
+        className="volumeSlider w-24 cursor-pointer"
         onValueChange={(value) => {
           const [newVolume] = value;
           const volumeValue = newVolume / 100;
           setVolume(volumeValue);
         }}
       />
+      <button className="volumeButton cursor-pointer p-1 rounded-full active:bg-slate-500/30 transition-colors " aria-label="Silenciar" onClick={(e) => {
+        e.stopPropagation();
+        handleClickVolume();
+      }}>
+        {volume === 0 ? <VolumeMute /> : <Volume />}
+      </button>
     </div>
   );
 };
@@ -221,7 +253,7 @@ export const AudioControlsDesk = ({ audio }) => {
         min={0}
         max={audio?.current?.duration ?? 0}
         className="w-full"
-        onClick={(e) => {e.stopPropagation()}}
+        onClick={(e) => { e.stopPropagation() }}
         onValueChange={(value) => {
           const [newTimeUpdate] = value;
           audio.current.currentTime = newTimeUpdate;
@@ -256,23 +288,25 @@ export const PlayerButtons = ({ audio, children }) => {
   return (
     <div className="flex flex-row justify-center items-center gap-6">
       <button onClick={(e) => {
-          e.stopPropagation();
-          handleClickBack();
-        }} className="w-7 h-7">
+        e.stopPropagation();
+        handleClickBack();
+      }} className="w-7 h-7 cursor-pointer"
+      aria-label="Rebobinar">
         <Back />
       </button>
 
       {children}
 
       <button onClick={(e) => {
-          e.stopPropagation();
-        }} className="w-7 h-7">
+        e.stopPropagation();
+      }} className="w-7 h-7 cursor-pointer"
+      aria-label="Siguiente">
         <Next />
       </button>
       <div className="hidden md:flex gap-1">
-        <span className="opacity-70 ">{formatTime(currentTime)}</span>
-        <span className="opacity-70"> / </span>
-        <span className="opacity-70">
+        <span className="opacity-70 text-xs">{formatTime(currentTime)}</span>
+        <span className="opacity-70 text-xs"> / </span>
+        <span className="opacity-70 text-xs">
           {duration ? formatTime(duration) : null}
         </span>
       </div>
@@ -297,11 +331,12 @@ export const LoopButton = ({ audio }) => {
 
   return (
     <button
+      aria-label="Repetir"
       onClick={(e) => {
         e.stopPropagation();
         handleClick();
       }}
-      className={isLooping ? "opacity-100" : "opacity-70"}
+      className={`loopButton relative cursor-pointer p-1 rounded-full active:bg-slate-500/30 transition-colors ${isLooping ? "opacity-100" : "opacity-60"}`}
     >
       <Loop />
     </button>
@@ -352,10 +387,10 @@ export function Player() {
       <div className="hidden md:flex justify-center rotate items-center z-40">
         <PlayerButtons audio={audioRef}>
           <button onClick={(e) => {
-          e.stopPropagation();
-          handleClick();
-        }} className="hidden md:block size-[42px]">
-            {isPlaying ? <Pause /> : <Play />}
+            e.stopPropagation();
+            handleClick();
+          }} className="hidden md:block size-[42px] cuirsor-pointer">
+            {isPlaying ? <Pause fill="red"/> : <Play />}
           </button>
         </PlayerButtons>
 
@@ -366,26 +401,29 @@ export function Player() {
         <CurrentSong {...currentMusic.song} />
       </div>
       <div className="hidden md:flex mr-8 gap-3">
-        <LoopButton audio={audioRef} />
-        <VolumeControls />
+      <VolumeControls />
+      <LoopButton audio={audioRef} />
         <button
           className={`${Arrow} hidden md:block w-2 justify-center items-center transition-all`}
           onClick={handleClickOpen}
+          aaria-label="Expandir "
         >
           <ArrowUp />
         </button>
       </div>
       {!isPlayerOpen && (
         <div className="min-w-10 z-50 pt-2 md:hidden">
-          <button onClick={(e) => {
-          e.stopPropagation();
-          handleClick();
-        }}>
+          <button
+          aria-label="Reproducir"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleClick();
+          }}>
             {isPlaying ? <Pause /> : <Play />}
           </button>
         </div>
       )}
-      <PlayerOpenMobile audio={audioRef} />
+      <PlayerOpenMobile audio={audioRef}/>
 
       <AudioControlsDesk audio={audioRef} />
     </div>

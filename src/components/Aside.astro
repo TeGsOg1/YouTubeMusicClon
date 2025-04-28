@@ -6,7 +6,7 @@ import LibraryIcon from "./icons/LibraryIcon.astro";
 
 <aside
   transition:persist
-  class="hidden md:flex flex-row fixed bg-gray-600 w-60 mt-20 ml-2 z-10 transition-all rounded-lg"
+  class="hidden md:flex flex-row backdrop-blur-[90] bg-gray-900/50 fixed w-60 mt-20 ml-2 z-10 transition-all rounded-lg border border-b-gray-800 border-collapse overflow-hidden"
   id="aside"
 >
   <ul>
@@ -14,7 +14,7 @@ import LibraryIcon from "./icons/LibraryIcon.astro";
       <a
         id="princ"
         href="/"
-        class="flex text-start justify-start rounded-lg py-4 px-[70px] gap-2 text-white hover:bg-gray-700 transition-all"
+        class="flex text-start justify-start rounded-lg py-4 px-[70px] gap-2 text-white font-semibold hover:bg-gray-800  transition-all"
       >
         <MainIcon />
         <span id="princ-txt">Inicio</span>
@@ -24,7 +24,7 @@ import LibraryIcon from "./icons/LibraryIcon.astro";
       <a
         id="expl"
         href="#"
-        class="flex text-start justify-start rounded-lg py-4 px-[70px] gap-2 text-white hover:bg-gray-700 transition-all"
+        class="flex text-start justify-start rounded-lg py-4 px-[70px] gap-2 text-white font-semibold hover:bg-gray-800  transition-all"
       >
         <ExplorerIcon />
         <span id="expl-txt">Explorar</span>
@@ -34,7 +34,7 @@ import LibraryIcon from "./icons/LibraryIcon.astro";
       <a
         id="lib"
         href="#"
-        class="flex text-start justify-start rounded-lg py-4 px-[70px] gap-2 text-white hover:bg-gray-700 transition-all"
+        class="flex text-start justify-start rounded-lg py-4 px-[70px] gap-2 text-white font-semibold hover:bg-gray-800  transition-all"
       >
         <LibraryIcon />
         <span id="lib-txt">Biblioteca</span>

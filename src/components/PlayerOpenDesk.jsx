@@ -6,10 +6,10 @@ export const SongImage = ({image, title}) => {
             <img 
                 src={image} 
                 alt={`${title} blurred image`}
-                className="animate-fade-in animate-delay-150 blur-[27px] h-full w-full max-w-[800px] max-h-[800px] object-contain right-0 left-0 my-0 p-10 mx-auto -z-10 absolute"></img>
+                className="animate-fade-in animate-delay-150 blur-[27px]  h-full w-full max-w-[800px] max-h-[800px] object-contain right-0 left-0 my-0 p-10 mx-auto -z-10 absolute"></img>
             <picture className="w-full h-full justify-center items-center flex">
                 <img 
-                className=" object-contain rounded-xl w-full h-full max-w-[700px] max-h-[700px]" 
+                className=" object-contain size-[200px] lg:w-full lg:h-full lg:max-w-[700px] lg:max-h-[700px]" 
                 src={image} 
                 alt={`${title} image`} 
                 />
@@ -20,9 +20,10 @@ export const SongImage = ({image, title}) => {
 
 export const SongLyric = ({lyric}) => {
     return(
-        <div className="flex justify-center items-center max-h-[650px] min-h-[200px] h-full w-full">
-            <article className="h-full w-full md:mb-20 lg:mb-0 justify-items-start overflow-y-auto p-5 bg-black">
-                <p className=" text-white text-xl whitespace-pre-line top-0">{lyric}</p>
+        <div className="flex flex-col justify-center items-center h-full w-full">
+            <h1 className="font-semibold text-3xl text-center text-white my-4 ">Letra</h1>
+            <article className="flex justify-items-start overflow-y-auto p-5 mb-6 bg-black">
+                <p className=" text-white text-md lg:text-xl whitespace-pre-line top-0">{lyric}</p>
             </article>
         </div>
     )

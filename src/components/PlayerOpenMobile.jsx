@@ -57,16 +57,16 @@ export const PlayerImageMobile = ({image, title, artists}) => {
     return (
       <div onClick={(e) => {e.stopPropagation()}} className='flex flex-col gap-4'>
         <div className="w-full h-full flex justify-center items-center p-10 relative">
-            <picture className="w-full h-full justify-center items-center flex">
+            <picture className="w-full h-full justify-center items-center flex aspect-w-full aspect-h-full">
                 <img 
-                className=" object-contain rounded-xl w-full h-full max-w-[280px] max-h-[280px]" 
+                className=" object-contain rounded-xl w-full h-full max-w-[300px] max-h-[300px]" 
                 src={image} 
                 alt={`${title} image`} 
                 />
             </picture>
         </div>
         <div className=' flex flex-col gap-3'>
-          <span className='text-2xl text-ellipsis text-white'>{title}</span>
+          <span className='text-2xl text-ellipsis font-semibold text-white'>{title}</span>
           <span className='text-xl text-white'>{artists}</span>
         </div>
       </div>
@@ -105,21 +105,23 @@ export const PlayerOpenMobile = ({audio}) => {
         <img 
                 src={currentMusic?.song?.image} 
                 alt={`${currentMusic?.song?.title} blurred image`}
-                className={`${!isPlayerOpen ? "hidden" : "" }  animate-fade-in animate-delay-150 blur-[90px] h-full w-full object-cover right-0 left-0 my-0 p-10 mx-auto -z-10 absolute`}></img>
+                className={`${!isPlayerOpen ? "hidden" : "" }  animate-fade-in animate-delay-150 blur-[90px] h-full w-full object-cover right-0 left-0 my-0 p-10 mx-auto -z-10 absolute`} />
         <div className='min-h-16 w-full flex items-center'>
-          <button onClick={handleClickOpen} className='rotate-180'>
+          <button onClick={handleClickOpen} className='rotate-180'
+          aria-label="Cerrar">
             <ArrowUp />
           </button>
         </div>
         {isPlayerSong && 
         <section>
-            <PlayerImageMobile {...currentMusic.song} />
+            <PlayerImageMobile {...currentMusic.song} /> 
           <div className='mt-5'>
               <AudioControlsMobile audio={audio} />
               <PlayerButtons audio={audio}>
               <button onClick={(e) => {
                 e.stopPropagation();
-                handleClick();}} className='PlayButtonMobile bg-white p-6 rounded-full'>
+                handleClick();}} className='PlayButtonMobile bg-white p-6 rounded-full'
+                aria-label="Reproducir">
                   {isPlaying ? <Pause className='fill-black'/> : <Play className='fill-black'/>}
               </button>
             </PlayerButtons>
@@ -130,7 +132,7 @@ export const PlayerOpenMobile = ({audio}) => {
         <section className='w-full overflow-hidden'>
           <div className='flex flex-col gap-3 py-3 h-full'>
             <span className='text-3xl text-center font-semibold'>Letra</span>
-            <p className='text-xl font-bold overflow-y-auto whitespace-pre-line'>
+            <p className='text-xl font-semibold overflow-y-auto whitespace-pre-line'>
               {currentMusic.song.lyric}
             </p>
           </div>
