@@ -15,13 +15,18 @@ export function CardPlayButton({ id, padding, title }) {
     if (isPlayingSong) {
       setIsPlaying(false);
         }
-
         fetch(`/api/getSongsInfo.json?id=${id}`)
         .then(res => res.json())
         .then(data => {
                 const { songs } = data;
+                if (songs && songs.length) {
+                  // guardar la lista completa en el store para navegación sin nuevos fetchs
+                  setCurrentMusic({ song: songs[id-1], songs });
+                } else {
+                  // si no vienen canciones, intentar guardar solo el song seleccionado
+                  setCurrentMusic({ song: { id } });
+                }
                 setIsPlaying(true)
-                setCurrentMusic({ song: songs[id-1] })
     });
     setIsPlayerOpen(true);
     }

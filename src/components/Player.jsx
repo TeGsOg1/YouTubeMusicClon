@@ -264,9 +264,26 @@ export const AudioControlsDesk = ({ audio }) => {
 };
 
 export const PlayerButtons = ({ audio, children }) => {
-  const { currentTime, setCurrentTime } = usePlayerStore(
-    (state) => state
-  );
+  const { currentTime, setIsPlaying, setCurrentTime, currentMusic, setCurrentMusic } = usePlayerStore(state => (state));
+
+  const handleClickNext = () => {
+    if (!currentMusic?.song) return;
+    const previewSongId = Number(currentMusic?.song?.id);
+    const songs = currentMusic?.songs ?? [];
+
+    const goToNextFromList = (list) => {
+      const idx = list.findIndex((s) => Number(s.id) === previewSongId);
+      const next = list[(idx + 1) % list.length] ?? list[0];
+      setCurrentMusic({ song: next, songs: list });
+    };
+
+    if (songs.length) {
+      goToNextFromList(songs);
+      setCurrentTime(0);
+      setIsPlaying(true);
+      return;
+    }
+  }
 
   const handleClickBack = () => {
     setCurrentTime(0);
@@ -299,6 +316,7 @@ export const PlayerButtons = ({ audio, children }) => {
 
       <button onClick={(e) => {
         e.stopPropagation();
+        handleClickNext();
       }} className="w-7 h-7 cursor-pointer"
       aria-label="Siguiente">
         <Next />
@@ -307,7 +325,7 @@ export const PlayerButtons = ({ audio, children }) => {
         <span className="opacity-70 text-xs">{formatTime(currentTime)}</span>
         <span className="opacity-70 text-xs"> / </span>
         <span className="opacity-70 text-xs">
-          {duration ? formatTime(duration) : null}
+          {duration ? formatTime(duration) : "00:00"}
         </span>
       </div>
     </div>
@@ -327,6 +345,7 @@ export const LoopButton = ({ audio }) => {
       setCurrentTime(0);
       audio.current.play();
     }
+    
   }, [currentTime]);
 
   return (
@@ -389,8 +408,8 @@ export function Player() {
           <button onClick={(e) => {
             e.stopPropagation();
             handleClick();
-          }} className="hidden md:block size-[42px] cuirsor-pointer">
-            {isPlaying ? <Pause fill="red"/> : <Play />}
+          }} className="hidden md:block size-[42px] cursor-pointer">
+            {isPlaying ? <Pause /> : <Play />}
           </button>
         </PlayerButtons>
 
